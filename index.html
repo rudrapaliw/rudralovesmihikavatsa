@@ -1,0 +1,1965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mihika Vatsa, Will you be mine? 💕</title>
+  <!-- Google Fonts: Pacifico (cute headers), Dancing Script (captions/signature/letters), and Nunito (ui text) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Nunito:wght@400;700;800;900&family=Pacifico&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Lychee Color Palette Variables */
+    :root {
+      --bg-primary: #FDF6F0;
+      --bg-secondary: #FAF0F0;
+      --bg-card: #FFFAF8;
+      
+      --accent-main: #F2C4CE;
+      --accent-secondary: #E8A0B0;
+      --highlight: #F7DCE0;
+      
+      --text-primary: #7D4E57;
+      --text-secondary: #B07080;
+      --text-light: #C9A0A8;
+      
+      --btn-color: #EBA8B5;
+      --btn-hover: #D98898;
+      --btn-text: #5C3040;
+      
+      --border-glow: #F0C8D0;
+      --heart-tint: #F5D5DC;
+    }
+
+    /* Reset and Box Sizing */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Fullscreen lychee gradient background */
+    body {
+      min-height: 100vh;
+      width: 100vw;
+      overflow-x: hidden;
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, #FFF0F5 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      padding: 1.5rem 0;
+    }
+
+    /* Subtle texture overlay for lychee skin / silk feel */
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.04;
+      pointer-events: none;
+      z-index: 0;
+      background-image: 
+        radial-gradient(var(--text-primary) 1px, transparent 0),
+        radial-gradient(var(--text-primary) 1px, transparent 0);
+      background-size: 8px 8px;
+      background-position: 0 0, 4px 4px;
+    }
+
+    /* --- Floating Background Emojis --- */
+    .teddy {
+      position: fixed;
+      pointer-events: none;
+      z-index: 1;
+      animation: bobbing 6s ease-in-out infinite alternate;
+      will-change: transform;
+      filter: grayscale(100%) sepia(100%) hue-rotate(315deg) saturate(180%) brightness(110%);
+      opacity: 0.55;
+    }
+
+    @keyframes bobbing {
+      0% {
+        transform: translateY(0) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-15px) rotate(5deg);
+      }
+      100% {
+        transform: translateY(5px) rotate(-5deg);
+      }
+    }
+
+    .heart {
+      position: fixed;
+      bottom: -50px;
+      pointer-events: none;
+      z-index: 2;
+      animation: floatUp 8s linear forwards;
+      will-change: transform, opacity;
+      filter: grayscale(100%) sepia(100%) hue-rotate(315deg) saturate(180%) brightness(110%);
+      opacity: 0.6;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.6;
+      }
+      90% {
+        opacity: 0.6;
+      }
+      100% {
+        transform: translateY(-115vh) translateX(var(--drift-x)) rotate(var(--drift-rot));
+        opacity: 0;
+      }
+    }
+
+    /* --- Falling Cherry Blossom Petals --- */
+    .petal {
+      position: fixed;
+      pointer-events: none;
+      z-index: 2;
+      animation: fallDown 9s linear forwards;
+      will-change: transform, opacity;
+      filter: grayscale(100%) sepia(100%) hue-rotate(320deg) saturate(140%) brightness(120%);
+      opacity: 0.45;
+    }
+
+    @keyframes fallDown {
+      0% {
+        transform: translateY(-5vh) translateX(0) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.5;
+      }
+      90% {
+        opacity: 0.5;
+      }
+      100% {
+        transform: translateY(105vh) translateX(var(--drift-x)) rotate(var(--drift-rot));
+        opacity: 0;
+      }
+    }
+
+    /* --- Main Glassmorphic Cards --- */
+    .card {
+      background: rgba(255, 250, 248, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(242, 196, 206, 0.4);
+      border-radius: 24px;
+      padding: 3rem 2.2rem;
+      width: 90%;
+      max-width: 500px;
+      text-align: center;
+      box-shadow: 0 15px 35px rgba(125, 78, 87, 0.08);
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.2rem;
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      will-change: transform, opacity;
+      overflow: visible;
+    }
+
+    /* Envelope cards handle letter overflow */
+    .envelope-card {
+      padding-top: 3.5rem;
+    }
+
+    /* Heading Styling */
+    h1, h2 {
+      font-family: 'Pacifico', cursive;
+      font-size: 2.3rem;
+      color: var(--text-primary);
+      text-shadow: 0 2px 6px rgba(242, 196, 206, 0.3);
+      line-height: 1.3;
+    }
+
+    .screen-tagline {
+      font-size: 0.85rem;
+      font-style: italic;
+      color: var(--text-light);
+      letter-spacing: 1.5px;
+      font-weight: 700;
+      text-align: center;
+      margin-top: 0.5rem;
+      text-shadow: 0 1px 2px rgba(242, 196, 206, 0.15);
+    }
+
+    /* Profile frames with glow */
+    .profile-frame {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid var(--accent-main);
+      box-shadow: 0 0 15px rgba(242, 196, 206, 0.6);
+      margin-bottom: 0.5rem;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    .glow-frame {
+      width: 120px;
+      height: 120px;
+      border-color: var(--accent-main);
+      box-shadow: 0 0 20px rgba(242, 196, 206, 0.7);
+      animation: framePulse 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes framePulse {
+      0% { box-shadow: 0 0 10px rgba(242, 196, 206, 0.5); }
+      100% { box-shadow: 0 0 25px rgba(235, 168, 181, 0.8); }
+    }
+
+    /* Lock Page Dropdowns */
+    .pink-select {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text-primary);
+      background-color: var(--bg-card);
+      border: 2px solid var(--accent-main);
+      border-radius: 12px;
+      padding: 0.6rem 0.5rem;
+      outline: none;
+      cursor: pointer;
+      width: 100px;
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+    .pink-select:focus {
+      border-color: var(--accent-secondary);
+      box-shadow: 0 0 8px rgba(242, 196, 206, 0.5);
+    }
+
+    /* Button Container */
+    .btn-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      width: 100%;
+      min-height: 100px;
+      position: relative;
+    }
+
+    /* Button Base Styling */
+    .btn {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 6px 15px rgba(235, 168, 181, 0.4);
+      transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      will-change: transform;
+    }
+
+    /* Yes Button: Normal size, pulsates softly */
+    .btn-yes {
+      background: var(--btn-color);
+      color: var(--btn-text);
+      font-size: 1.35rem;
+      padding: 0.8rem 2.2rem;
+      animation: pulse 2s infinite;
+      z-index: 11;
+    }
+
+    .btn-yes:hover {
+      background: var(--btn-hover);
+      box-shadow: 0 8px 25px rgba(235, 168, 181, 0.7);
+      transform: scale(1.05);
+    }
+
+    .btn-yes:active {
+      transform: scale(0.95);
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(240, 200, 208, 0.6);
+      }
+      70% {
+        box-shadow: 0 0 0 15px rgba(240, 200, 208, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(240, 200, 208, 0);
+      }
+    }
+
+    /* No Button: Transparent, blush pink border, mauve text */
+    .btn-no {
+      background: transparent;
+      border: 1px solid var(--accent-main);
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      padding: 0.5rem 1.2rem;
+    }
+
+    .btn-no:hover {
+      background: rgba(242, 196, 206, 0.15);
+    }
+
+    /* --- Hub Page (Main Menu) Card Styling --- */
+    .hub-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.2rem;
+      width: 100%;
+      margin-top: 0.5rem;
+    }
+
+    .hub-card {
+      background: rgba(255, 250, 248, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(242, 196, 206, 0.5);
+      border-radius: 20px;
+      padding: 1.6rem 1rem;
+      cursor: pointer;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.3s ease;
+      outline: none;
+      font-family: 'Nunito', sans-serif;
+      box-shadow: 0 4px 10px rgba(125, 78, 87, 0.04);
+      animation: floatCard 4s ease-in-out infinite alternate;
+    }
+
+    .hub-grid .hub-card:nth-child(1) { animation-delay: 0s; }
+    .hub-grid .hub-card:nth-child(2) { animation-delay: 0.5s; }
+    .hub-grid .hub-card:nth-child(3) { animation-delay: 1s; }
+    .hub-grid .hub-card:nth-child(4) { animation-delay: 1.5s; }
+
+    @keyframes floatCard {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-6px); }
+    }
+
+    .hub-card:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 10px 25px rgba(242, 196, 206, 0.6);
+      border-color: var(--accent-secondary);
+    }
+
+    .hub-icon {
+      font-size: 2.2rem;
+    }
+
+    .hub-card-title {
+      font-weight: 900;
+      font-size: 1.12rem;
+      color: var(--text-primary);
+    }
+
+    .hub-card-subtitle {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      line-height: 1.25;
+    }
+
+    /* Soft colors for hub cards */
+    .bg-blush { background: rgba(255, 240, 243, 0.85); }
+    .bg-cream { background: rgba(255, 250, 240, 0.85); }
+    .bg-lychee { background: rgba(253, 240, 243, 0.85); }
+    .bg-mauve { background: rgba(250, 235, 245, 0.85); }
+
+    /* --- Envelope & Letters --- */
+    .envelope-wrapper {
+      position: relative;
+      width: 320px;
+      height: 200px;
+      background-color: var(--bg-secondary);
+      border-radius: 0 0 15px 15px;
+      box-shadow: 0 12px 30px rgba(125, 78, 87, 0.12);
+      cursor: pointer;
+      transform-style: preserve-3d;
+      margin: 30px auto;
+      transition: transform 0.4s;
+      border: 1px solid rgba(242, 196, 206, 0.35);
+      flex-shrink: 0;
+    }
+
+    .envelope-wrapper:hover:not(.open) {
+      transform: translateY(-5px) scale(1.02);
+    }
+
+    .envelope-wrapper::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 100px 160px 100px 0;
+      border-color: transparent #fce6ea transparent transparent;
+      z-index: 3;
+    }
+
+    .envelope-wrapper::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 100px 0 100px 160px;
+      border-color: transparent transparent transparent #fce6ea;
+      z-index: 3;
+    }
+
+    .envelope-front {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 160px 105px 160px;
+      border-color: transparent transparent #f7d6dc transparent;
+      z-index: 4;
+      border-radius: 0 0 15px 15px;
+    }
+
+    .envelope-flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 105px 160px 0 160px;
+      border-color: #f7d6dc transparent transparent transparent;
+      transform-origin: top;
+      z-index: 5;
+      transition: transform 0.5s ease, z-index 0.3s ease;
+    }
+
+    .envelope-heart {
+      position: absolute;
+      top: 90px;
+      left: 145px;
+      font-size: 1.8rem;
+      z-index: 6;
+      transition: opacity 0.3s;
+      filter: grayscale(100%) sepia(100%) hue-rotate(315deg) saturate(180%) brightness(110%);
+    }
+
+    .letter-paper {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      width: 300px;
+      height: 180px;
+      background-color: var(--bg-card);
+      border-radius: 8px;
+      z-index: 2;
+      transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1), height 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+      padding: 18px;
+      box-shadow: 0 4px 12px rgba(235, 168, 181, 0.2);
+      overflow: hidden;
+      border: 2px dashed var(--accent-main);
+    }
+
+    .letter-content {
+      font-family: 'Dancing Script', cursive;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--btn-text);
+      line-height: 1.45;
+      text-align: left;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      height: 100%;
+      overflow-y: auto;
+    }
+
+    /* Envelope opening animations */
+    .envelope-wrapper.open .envelope-flap {
+      transform: rotateX(180deg);
+      z-index: 1;
+    }
+
+    .envelope-wrapper.open .envelope-heart {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .envelope-wrapper.open .letter-paper {
+      transform: translateY(-135px);
+      height: 330px;
+      z-index: 10;
+      box-shadow: 0 15px 35px rgba(125, 78, 87, 0.15);
+      cursor: default;
+    }
+
+    .envelope-wrapper.open .letter-content {
+      opacity: 1;
+      transition-delay: 0.35s;
+    }
+
+    .letter-content::-webkit-scrollbar {
+      width: 4px;
+    }
+    .letter-content::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .letter-content::-webkit-scrollbar-thumb {
+      background: rgba(235, 168, 181, 0.3);
+      border-radius: 4px;
+    }
+
+    /* --- SECTION B: Confession Letter Stack (Flex layout) --- */
+    .letter-section-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2.2rem;
+      width: 100%;
+      flex-wrap: wrap;
+    }
+
+    .polaroids-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      flex-shrink: 0;
+    }
+
+    /* --- Polaroid Layouts (cream white, blush pink borders, active glows) --- */
+    .polaroid-frame {
+      background-color: var(--bg-card);
+      border: 1px solid var(--accent-main);
+      padding: 10px 10px 18px 10px;
+      box-shadow: 0 4px 12px rgba(242, 196, 206, 0.4);
+      border-radius: 4px;
+      width: 150px;
+      transition: all 0.3s;
+    }
+
+    .polaroid-frame:hover {
+      transform: rotate(0deg) scale(1.05) !important;
+      box-shadow: 0 8px 25px rgba(235, 168, 181, 0.8);
+      z-index: 6;
+    }
+
+    .polaroid-tilt-left { transform: rotate(-5deg); }
+    .polaroid-tilt-right { transform: rotate(5deg); }
+    .polaroid-tilt-straight { transform: rotate(-1deg); }
+
+    .polaroid-photo-wrapper {
+      width: 128px;
+      height: 115px;
+      background-color: #fff;
+      overflow: hidden;
+      border-radius: 2px;
+      border: 1px solid rgba(242, 196, 206, 0.2);
+    }
+
+    .polaroid-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .polaroid-caption {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1rem;
+      color: var(--text-secondary);
+      margin-top: 8px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    /* --- SECTION C: Reasons Flip Grid --- */
+    .reasons-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      width: 100%;
+      perspective: 1000px;
+      margin-top: 0.5rem;
+    }
+
+    .flip-card {
+      width: 100%;
+      height: 150px;
+      cursor: pointer;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+      border-radius: 16px;
+    }
+
+    .flip-card.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .card-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      border: 1px solid var(--accent-main);
+      box-shadow: 0 4px 10px rgba(125,78,87,0.05);
+    }
+
+    .face-front {
+      background-color: var(--btn-color);
+      color: #fff;
+      font-family: 'Pacifico', cursive;
+      font-size: 1.8rem;
+      text-shadow: 0 2px 4px rgba(125, 78, 87, 0.25);
+    }
+
+    .face-front span {
+      font-size: 0.8rem;
+      margin-top: 4px;
+    }
+
+    .face-back {
+      background-color: var(--bg-card);
+      color: var(--text-primary);
+      transform: rotateY(180deg);
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.05rem;
+      font-weight: bold;
+      line-height: 1.35;
+      text-align: center;
+    }
+
+    /* --- SECTION D: Photo Collage --- */
+    .collage-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      width: 100%;
+      margin: 1.5rem 0;
+    }
+
+    .collage-side {
+      width: 90px;
+      height: 110px;
+      background: var(--bg-card);
+      border: 1px solid var(--accent-main);
+      border-radius: 4px;
+      padding: 5px 5px 12px 5px;
+      box-shadow: 0 4px 10px rgba(242,196,206,0.3);
+      flex-shrink: 0;
+      transition: all 0.3s;
+    }
+    .collage-side:nth-child(1) { transform: rotate(-8deg); }
+    .collage-side:nth-child(3) { transform: rotate(8deg); }
+
+    .collage-center {
+      width: 140px;
+      height: 180px;
+      background: var(--bg-card);
+      border: 1px solid var(--accent-main);
+      border-radius: 4px;
+      padding: 8px 8px 18px 8px;
+      box-shadow: 0 8px 20px rgba(235, 168, 181, 0.5);
+      z-index: 5;
+      flex-shrink: 0;
+      transform: scale(1.05);
+      transition: all 0.3s;
+    }
+
+    .collage-side:hover, .collage-center:hover {
+      transform: scale(1.1) rotate(0deg) !important;
+      box-shadow: 0 8px 25px rgba(235, 168, 181, 0.8);
+      z-index: 6;
+    }
+
+    .collage-img-wrapper {
+      width: 100%;
+      height: calc(100% - 15px);
+      overflow: hidden;
+      border-radius: 2px;
+      border: 1px solid rgba(242, 196, 206, 0.15);
+      box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
+    }
+
+    .collage-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .collage-caption {
+      font-family: 'Dancing Script', cursive;
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      text-align: center;
+      margin-top: 5px;
+      font-weight: bold;
+    }
+
+    /* --- Date Planner Screen --- */
+    .date-planner {
+      overflow-y: auto;
+      max-height: 92vh;
+      padding: 2.2rem 1.6rem;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(235, 168, 181, 0.5) rgba(255, 255, 255, 0.1);
+    }
+
+    .date-planner::-webkit-scrollbar {
+      width: 6px;
+    }
+    .date-planner::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+    }
+    .date-planner::-webkit-scrollbar-thumb {
+      background: rgba(235, 168, 181, 0.5);
+      border-radius: 10px;
+    }
+
+    .planner-section {
+      width: 100%;
+      background: rgba(255, 250, 248, 0.9);
+      border: 1px solid var(--accent-main);
+      border-radius: 16px;
+      padding: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    .section-title {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 1.15rem;
+      color: var(--text-primary);
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* --- Calendar Styling --- */
+    .calendar-container {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.4);
+      border-radius: 15px;
+      padding: 0.8rem;
+      border: 1px solid var(--accent-main);
+    }
+
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.8rem;
+    }
+
+    .calendar-month-year {
+      color: var(--text-primary);
+      font-weight: 800;
+      font-size: 1.05rem;
+    }
+
+    .cal-nav-btn {
+      background: rgba(242, 196, 206, 0.3);
+      border: none;
+      color: var(--text-primary);
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .cal-nav-btn:hover {
+      background: rgba(242, 196, 206, 0.5);
+    }
+
+    .calendar-weekdays {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      text-align: center;
+      font-weight: 800;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+    }
+
+    .calendar-days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+    }
+
+    .calendar-day {
+      aspect-ratio: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-primary);
+      font-weight: 700;
+      font-size: 0.9rem;
+      border-radius: 50%;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.2s;
+    }
+
+    .calendar-day:hover:not(.disabled):not(.active) {
+      background: rgba(242, 196, 206, 0.2);
+    }
+
+    .calendar-day.active {
+      background: var(--btn-color) !important;
+      color: var(--btn-text) !important;
+      box-shadow: 0 0 10px rgba(235, 168, 181, 0.8);
+      transform: scale(1.1);
+    }
+
+    .calendar-day.disabled {
+      opacity: 0.3;
+      pointer-events: none;
+      color: var(--text-light);
+    }
+
+    .special-day-text {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--text-secondary);
+      text-align: center;
+    }
+
+    /* --- Time Picker Styling --- */
+    .time-picker-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .time-card {
+      background: var(--bg-card);
+      border: 1px solid var(--accent-main);
+      border-radius: 16px;
+      padding: 0.8rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: var(--text-primary);
+      border: none;
+      font-family: 'Nunito', sans-serif;
+    }
+
+    .time-card:hover {
+      background: var(--bg-secondary);
+      transform: translateY(-2px);
+    }
+
+    .time-card.active {
+      background: var(--btn-color) !important;
+      color: var(--btn-text) !important;
+      border: 1px solid var(--accent-secondary);
+      box-shadow: 0 0 12px rgba(235, 168, 181, 0.6);
+      transform: scale(1.03);
+    }
+
+    .time-emoji {
+      font-size: 1.5rem;
+      margin-bottom: 4px;
+    }
+
+    .time-label {
+      font-weight: 800;
+      font-size: 0.9rem;
+    }
+
+    .time-hours {
+      font-size: 0.7rem;
+      opacity: 0.8;
+    }
+
+    /* --- Place Selector Styling --- */
+    .place-picker-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .place-card {
+      background: var(--bg-card);
+      border: 1px solid var(--accent-main);
+      border-radius: 16px;
+      padding: 1rem 0.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: var(--text-primary);
+      border: none;
+      font-family: 'Nunito', sans-serif;
+    }
+
+    .place-card:hover {
+      background: var(--bg-secondary);
+      transform: translateY(-2px);
+    }
+
+    .place-card.active {
+      background: var(--btn-color) !important;
+      color: var(--btn-text) !important;
+      border: 1px solid var(--accent-secondary);
+      box-shadow: 0 0 12px rgba(235, 168, 181, 0.6);
+      transform: scale(1.03);
+    }
+
+    .place-emoji {
+      font-size: 1.6rem;
+      margin-bottom: 4px;
+    }
+
+    .place-name {
+      font-weight: 800;
+      font-size: 0.82rem;
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    /* Confetti Falling Custom color style */
+    .confetti-heart {
+      position: fixed;
+      pointer-events: none;
+      z-index: 1000;
+      animation: fall linear forwards;
+      will-change: transform, opacity;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-10vh) rotate(0deg) translateX(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(110vh) rotate(var(--rot)) translateX(var(--sway));
+        opacity: 0;
+      }
+    }
+
+    /* Shake Animation on Validation Error / Password Error */
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-8px); }
+      40%, 80% { transform: translateX(8px); }
+    }
+
+    /* Confetti Burst Keyframes */
+    @keyframes burstOut {
+      0% {
+        transform: translate(-50%, -50%) scale(0.3);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(calc(-50% + var(--sway-x)), calc(-50% + var(--sway-y))) rotate(var(--rot)) scale(1.3);
+        opacity: 0;
+      }
+    }
+
+    /* Celebration Card styling */
+    .celebration {
+      display: none;
+      opacity: 0;
+      transform: scale(0.8);
+      background: rgba(255, 250, 248, 0.85);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid rgba(242, 196, 206, 0.4);
+      border-radius: 24px;
+      padding: 3rem 2.5rem;
+      width: 90%;
+      max-width: 550px;
+      text-align: center;
+      box-shadow: 0 15px 35px rgba(125, 78, 87, 0.08);
+      z-index: 10;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.8rem;
+      transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      will-change: transform, opacity;
+    }
+
+    @keyframes rotateHeart {
+      0% { transform: scale(1) rotate(0deg); }
+      50% { transform: scale(1.1) rotate(15deg); }
+      100% { transform: scale(1) rotate(0deg); }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .letter-section-container {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .polaroids-stack {
+        flex-direction: row;
+        overflow-x: auto;
+        width: 100%;
+        padding: 10px 5px;
+        justify-content: flex-start;
+      }
+      .polaroids-stack .polaroid-frame {
+        flex: 0 0 145px;
+      }
+      .envelope-wrapper {
+        margin: 10px auto;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1, h2 {
+        font-size: 1.95rem;
+      }
+      .card {
+        padding: 2.2rem 1.1rem;
+      }
+      .place-name {
+        font-size: 0.72rem;
+      }
+      .time-hours {
+        font-size: 0.65rem;
+      }
+      .envelope-wrapper {
+        transform: scale(0.85);
+      }
+      .envelope-card {
+        padding-top: 1.8rem;
+      }
+      .reasons-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+      .flip-card {
+        height: 135px;
+      }
+      .face-back {
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .envelope-wrapper {
+        transform: scale(0.76);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================ -->
+  <!-- SCREEN 1: PASSWORD LOCK PAGE -->
+  <!-- ============================ -->
+  <div class="card" id="screen1">
+    <div class="profile-frame">
+      <img class="childhood-photo-slot" src="" alt="Mihika" style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    <h1>This page is only for Mihika Vatsa 🔒💕</h1>
+    <p style="color: var(--text-secondary); font-weight: 700; margin-top: -0.5rem; font-size: 0.95rem; line-height: 1.4;">Enter your date of birth to unlock something special...</p>
+    
+    <div style="display: flex; gap: 0.6rem; width: 100%; justify-content: center; margin-top: 0.5rem;">
+      <select id="dobDay" class="pink-select">
+        <option value="">Day</option>
+      </select>
+      <select id="dobMonth" class="pink-select">
+        <option value="">Month</option>
+      </select>
+      <select id="dobYear" class="pink-select">
+        <option value="">Year</option>
+      </select>
+    </div>
+    
+    <button class="btn btn-yes" id="unlockBtn" style="width: 100%; margin-top: 0.8rem;">Unlock 💖</button>
+    <p id="lockErrorMsg" style="color: var(--text-primary); font-weight: 800; font-size: 0.95rem; display: none; text-shadow: 0 1px 3px rgba(242, 196, 206, 0.3);"></p>
+    
+    <p class="screen-tagline">rudralovesmihikavatsa 🌸</p>
+  </div>
+
+  <!-- ============================ -->
+  <!-- SCREEN 2: HUB PAGE (MENU)    -->
+  <!-- ============================ -->
+  <div class="card" id="hubScreen" style="display: none; opacity: 0; transform: scale(0.8); max-width: 530px; gap: 1.5rem; padding: 2.5rem 1.8rem;">
+    <div class="profile-frame glow-frame" style="margin-top: 0.5rem;">
+      <img class="childhood-photo-slot" src="" alt="Mihika Vatsa" style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    <h2 style="font-size: 2.1rem; line-height: 1.2;">Hey Mihika Vatsa 🌸</h2>
+    <p class="screen-tagline" style="margin-top: -1rem; font-size: 0.95rem; color: var(--text-secondary);">rudralovesmihikavatsa 💕</p>
+    
+    <div class="hub-grid">
+      <button class="hub-card bg-blush" onclick="openSection('sectionA')">
+        <span class="hub-icon">💌</span>
+        <h3 class="hub-card-title">Why I made this</h3>
+        <p class="hub-card-subtitle">A little note from Rudra</p>
+      </button>
+      <button class="hub-card bg-cream" onclick="openSection('sectionB')">
+        <span class="hub-icon">📜</span>
+        <h3 class="hub-card-title">A letter for you</h3>
+        <p class="hub-card-subtitle">Read when you're ready</p>
+      </button>
+      <button class="hub-card bg-lychee" onclick="openSection('sectionC')">
+        <span class="hub-icon">💕</span>
+        <h3 class="hub-card-title">Reasons I like you</h3>
+        <p class="hub-card-subtitle">Click to discover each one</p>
+      </button>
+      <button class="hub-card bg-mauve" onclick="openSection('sectionD')">
+        <span class="hub-icon">💍</span>
+        <h3 class="hub-card-title">The big question...</h3>
+        <p class="hub-card-subtitle">When you're ready, open last 🥺</p>
+      </button>
+    </div>
+    
+    <p class="screen-tagline" style="margin-top: 1rem;">rudralovesmihikavatsa 🌸</p>
+  </div>
+
+  <!-- ============================ -->
+  <!-- SECTION A: WHY I MADE THIS   -->
+  <!-- ============================ -->
+  <div class="card envelope-card" id="sectionA" style="display: none; opacity: 0; transform: scale(0.8);">
+    <h2 class="planner-title">Why I Made This... 💌</h2>
+    
+    <div class="envelope-wrapper" id="envelopeA">
+      <div class="envelope-flap"></div>
+      <div class="envelope-heart">💖</div>
+      <div class="envelope-front"></div>
+      <div class="letter-paper">
+        <div class="letter-content" style="padding-top: 5px;">
+          <!-- Rudra photo top right in letter -->
+          <div style="float: right; width: 62px; height: 62px; border-radius: 50%; overflow: hidden; border: 2px solid var(--accent-main); margin-left: 10px; margin-bottom: 5px; box-shadow: 0 0 8px rgba(242, 196, 206, 0.4);">
+            <img id="rudra-photo-slot" src="" alt="Rudra" style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
+          <p>Dear Mihika,</p>
+          <br>
+          <p>You must be wondering why someone made an entire website just for you.</p>
+          <br>
+          <p>Honestly? Because you deserve more than just a text message. You deserve something that took time, thought, and a lot of nervousness to put together.</p>
+          <br>
+          <p>I wanted you to feel, even for a few minutes, how much you mean to someone.</p>
+          <br>
+          <p>This website is my way of saying — you are worth every effort.</p>
+          <br>
+          <p style="text-align: right;">With a hopeful heart,</p>
+          <p style="text-align: right; font-weight: bold; margin-bottom: 20px;">Rudra 💌</p>
+        </div>
+      </div>
+    </div>
+    
+    <button class="btn btn-yes" onclick="backToHub('sectionA')" style="width: 100%; margin-top: 1.5rem;">Back to menu 🌸</button>
+    <p class="screen-tagline">rudralovesmihikavatsa 🌸</p>
+  </div>
+
+  <!-- ============================ -->
+  <!-- SECTION B: CONFESSION LETTER -->
+  <!-- ============================ -->
+  <div class="card envelope-card" id="sectionB" style="display: none; opacity: 0; transform: scale(0.8); max-width: 850px; padding: 2.5rem 1.8rem;">
+    <h2 class="planner-title">A Letter for You... 📜</h2>
+    
+    <div class="letter-section-container">
+      <!-- Envelope -->
+      <div class="envelope-wrapper" id="envelopeB" style="margin: 20px 0;">
+        <div class="envelope-flap"></div>
+        <div class="envelope-heart">💖</div>
+        <div class="envelope-front"></div>
+        <div class="letter-paper">
+          <div class="letter-content">
+            <p>Dear Mihika Vatsa,</p>
+            <br>
+            <p>I don't know where to begin, because some feelings are too big for words. But I've been carrying this in my heart for so long, and today I finally have the courage to say it.</p>
+            <br>
+            <p>You are the kind of person who makes ordinary moments feel like magic. The way you laugh, the way you talk, the way you just exist — it does something to me that I can't explain.</p>
+            <br>
+            <p>I think about you more than I should. And honestly? I don't want to stop.</p>
+            <br>
+            <p>I'm Rudra. And I think I'm completely, helplessly falling for you.</p>
+            <br>
+            <p>This isn't just a confession. It's me hoping, with my whole heart, that maybe — just maybe — you feel something too.</p>
+            <br>
+            <p style="text-align: right;">With every heartbeat,</p>
+            <p style="text-align: right; font-weight: bold; margin-bottom: 20px;">Rudra 💌</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Polaroids stack on the right -->
+      <div class="polaroids-stack">
+        <div class="polaroid-frame polaroid-tilt-left">
+          <div class="polaroid-photo-wrapper">
+            <img id="polaroid1-slot" src="" alt="Little Mihika" class="polaroid-image">
+          </div>
+          <p class="polaroid-caption">Little Mihika 🧸</p>
+        </div>
+        <div class="polaroid-frame polaroid-tilt-right">
+          <div class="polaroid-photo-wrapper">
+            <img id="polaroid2-slot" src="" alt="School Days" class="polaroid-image">
+          </div>
+          <p class="polaroid-caption">School days 📚</p>
+        </div>
+        <div class="polaroid-frame polaroid-tilt-straight">
+          <div class="polaroid-photo-wrapper">
+            <img id="polaroid3-slot" src="" alt="Favorite Person" class="polaroid-image">
+          </div>
+          <p class="polaroid-caption">My favourite person 💕</p>
+        </div>
+      </div>
+    </div>
+    
+    <button class="btn btn-yes" onclick="backToHub('sectionB')" style="width: 100%; margin-top: 1.5rem;">Back to menu 🌸</button>
+    <p class="screen-tagline">rudralovesmihikavatsa 🌸</p>
+  </div>
+
+  <!-- ============================ -->
+  <!-- SECTION C: REASONS I LIKE YOU-->
+  <!-- ============================ -->
+  <div class="card" id="sectionC" style="display: none; opacity: 0; transform: scale(0.8); max-width: 650px; padding: 2.2rem 1.6rem;">
+    <h2 class="planner-title" style="font-size: 2.1rem;">The reasons I like you, Mihika 💕</h2>
+    <p style="color: var(--text-secondary); font-weight: 700; margin-top: -0.8rem;">Tap each card to reveal 🌸</p>
+    
+    <div class="reasons-grid"></div>
+    
+    <p id="reasonsFooter" style="color: var(--text-primary); font-weight: 800; font-size: 1.1rem; min-height: 28px; opacity: 0; transition: opacity 0.5s ease; margin-top: 1rem; text-align: center; font-family: 'Nunito', sans-serif;"></p>
+    
+    <button class="btn btn-yes" onclick="backToHub('sectionC')" style="width: 100%; margin-top: 1.2rem;">Back to menu 🌸</button>
+    <p class="screen-tagline">rudralovesmihikavatsa 🌸</p>
+  </div>
+
+  <!-- ============================ -->
+  <!-- SECTION D: WILL YOU BE MINE? -->
+  <!-- ============================ -->
+  <div class="card" id="sectionD" style="display: none; opacity: 0; transform: scale(0.8);">
+    <div class="profile-frame glow-frame" style="margin-bottom: 0.5rem;">
+      <img id="recent-photo-slot" src="" alt="Mihika Recent" style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    <h1 style="font-size: 2.5rem; line-height: 1.2;">Mihika Vatsa... 🌸</h1>
+    <h1 style="font-size: 2.1rem; color: var(--text-secondary); text-shadow: 0 1px 3px rgba(242, 196, 206, 0.2);">Will you be mine? 💕</h1>
+    
+    <div class="btn-container" style="margin-top: 1rem;">
+      <button class="btn btn-yes" id="yesBtn">Yes 💖</button>
+      <button class="btn btn-no" id="noBtn">No 🥺</button>
+    </div>
+    
+    <p id="noMessage" style="color: var(--text-secondary); font-weight: 800; min-height: 28px; font-size: 1.05rem; transition: opacity 0.2s ease; opacity: 0; font-style: italic;"></p>
+    
+    <button class="btn btn-no" onclick="backToHub('sectionD')" style="width: 100%; margin-top: 1rem; border-color: rgba(242, 196, 206, 0.3);">Back to menu 🌸</button>
+    <p class="screen-tagline" style="font-style: italic;">rudralovesmihikavatsa</p>
+  </div>
+
+  <!-- ============================ -->
+  <!-- SCREEN 4: CELEBRATION PLANNER-->
+  <!-- ============================ -->
+  <div class="card date-planner" id="screen4" style="display: none; opacity: 0; transform: scale(0.8); max-width: 550px;">
+    <h2 class="planner-title" style="font-size: 2.2rem;">Yayyyy Mihika!! 🎉💖</h2>
+    <p style="color: var(--text-secondary); font-weight: 800; font-size: 1.15rem; margin-top: -0.5rem; text-shadow: 0 1px 2px rgba(242,196,206,0.25);">You just made Rudra the happiest person alive!</p>
+    
+    <!-- Photo Collage -->
+    <div class="collage-container">
+      <div class="collage-side">
+        <div class="collage-img-wrapper">
+          <img id="collage-left-slot" src="" alt="Childhood" class="collage-img">
+        </div>
+        <p class="collage-caption">Then 🧸</p>
+      </div>
+      
+      <div class="collage-center">
+        <div class="collage-img-wrapper">
+          <img id="collage-center-slot" src="" alt="Recent" class="collage-img">
+        </div>
+        <p class="collage-caption">Always You 💖</p>
+      </div>
+      
+      <div class="collage-side">
+        <div class="collage-img-wrapper">
+          <img id="collage-right-slot" src="" alt="School" class="collage-img">
+        </div>
+        <p class="collage-caption">Now 🎓</p>
+      </div>
+    </div>
+    
+    <p style="color: var(--text-light); font-weight: 700; font-size: 0.98rem; text-align: center; margin-top: -0.5rem; margin-bottom: 0.8rem; font-style: italic;">"From then to now, always you 💖"</p>
+    <p style="color: var(--text-secondary); font-weight: 800; font-size: 1.05rem; margin-bottom: 0.8rem; text-align: center;">Now let's plan our first date 🌹</p>
+    
+    <!-- 1. Calendar Grid -->
+    <div class="planner-section">
+      <h3 class="section-title">1. Pick Our Day 📆</h3>
+      <div class="calendar-container">
+        <div class="calendar-header">
+          <button id="prevMonthBtn" class="cal-nav-btn">&lt;</button>
+          <span id="calendarMonthYear" class="calendar-month-year"></span>
+          <button id="nextMonthBtn" class="cal-nav-btn">&gt;</button>
+        </div>
+        <div class="calendar-weekdays">
+          <div>Su</div><div>Mo</div><div>Tu</div><div>We</div><div>Th</div><div>Fr</div><div>Sa</div>
+        </div>
+        <div class="calendar-days" id="calendarDays"></div>
+      </div>
+      <p class="special-day-text" id="specialDayText">Our first date: [select a date] 💕</p>
+    </div>
+
+    <!-- 2. Time Preferences -->
+    <div class="planner-section">
+      <h3 class="section-title">2. Choose the Time ⏰</h3>
+      <div class="time-picker-grid">
+        <button class="time-card" data-time="Morning (10 AM – 12 PM)">
+          <span class="time-emoji">☀️</span>
+          <span class="time-label">Morning</span>
+          <span class="time-hours">10 AM – 12 PM</span>
+        </button>
+        <button class="time-card" data-time="Afternoon (1 PM – 4 PM)">
+          <span class="time-emoji">🌤️</span>
+          <span class="time-label">Afternoon</span>
+          <span class="time-hours">1 PM – 4 PM</span>
+        </button>
+        <button class="time-card" data-time="Evening (5 PM – 8 PM)">
+          <span class="time-emoji">🌆</span>
+          <span class="time-label">Evening</span>
+          <span class="time-hours">5 PM – 8 PM</span>
+        </button>
+        <button class="time-card" data-time="Night (8 PM onwards)">
+          <span class="time-emoji">🌙</span>
+          <span class="time-label">Night</span>
+          <span class="time-hours">8 PM onwards</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 3. Place Selector -->
+    <div class="planner-section">
+      <h3 class="section-title">3. Select a Spot 📍</h3>
+      <div class="place-picker-grid">
+        <button class="place-card" data-place="Greater Noida West 🏙️">
+          <span class="place-emoji">🏙️</span>
+          <span class="place-name">Greater Noida West</span>
+        </button>
+        <button class="place-card" data-place="Noida 🌃">
+          <span class="place-emoji">🌃</span>
+          <span class="place-name">Noida</span>
+        </button>
+        <button class="place-card" data-place="Delhi ❤️">
+          <span class="place-emoji">❤️</span>
+          <span class="place-name">Delhi</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Confirm Button -->
+    <button class="btn btn-yes" id="confirmDateBtn" style="width: 100%; font-size: 1.25rem; margin-top: 0.8rem;">Lock it in! Rudra will be there 💌</button>
+    
+    <button class="btn btn-no" onclick="backToHub('screen4')" style="width: 100%; margin-top: 1rem; border-color: rgba(242, 196, 206, 0.3);">Back to menu 🌸</button>
+    <p class="screen-tagline">rudralovesmihikavatsa 🌸</p>
+  </div>
+
+  <!-- Final Confirmation Screen -->
+  <div class="celebration" id="finalConfirmationScreen" style="max-width: 520px; gap: 2rem;">
+    <div class="celebration-gif" style="font-size: 5rem; animation: rotateHeart 2.5s infinite;">💌🌹</div>
+    <h2 id="finalMessageText" style="font-size: 1.7rem; font-family: 'Nunito', sans-serif; font-weight: 800; text-shadow: 0 2px 8px rgba(199, 21, 133, 0.4); line-height: 1.45;"></h2>
+    <a id="gmailLinkBtn" href="#" target="_blank" class="btn btn-yes" style="text-decoration: none; width: 100%; display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-top: 1rem; animation: pulse 2s infinite;">
+      Open Gmail & Send 💌
+    </a>
+    <p class="screen-tagline">rudralovesmihikavatsa 🌸</p>
+  </div>
+
+  <script>
+    // =========================================================================
+    // PHOTO CONFIGURATION SLOTS
+    // Replace the URLs inside the quotes with your own direct links (e.g. from imgbb.com)
+    // =========================================================================
+    const PHOTOS = {
+      childhood_photo: "images/cute_bears.png",   // Lock screen & Hub page circular frame
+      polaroid1: "images/cute_bears.png",         // Childhood polaroid in Letter
+      polaroid2: "images/mihika_school.png",       // School days polaroid in Letter
+      polaroid3: "images/mihika_recent1.png",      // Recent polaroid in Letter
+      recent_photo: "images/mihika_recent2.png",   // Glowing frame in Will You Be Mine screen
+      collage_center: "images/mihika_recent1.png", // Big center photo in celebration
+      collage_left: "images/cute_bears.png",       // Small left photo in celebration
+      collage_right: "images/mihika_school.png",   // Small right photo in celebration
+      rudra_photo: "images/cute_bears.png"         // Rudra's profile photo in Section A
+    };
+
+    // --- Gmail configuration ---
+    const MY_GMAIL = "itzrudra20061@gmail.com"; // Replace with your actual Gmail
+
+    // --- Dynamic Photo Slot Population ---
+    function initPhotoSlots() {
+      // Lock screen & Hub page circular frames
+      document.querySelectorAll('.childhood-photo-slot').forEach(img => {
+        img.src = PHOTOS.childhood_photo;
+      });
+      // Section B Polaroids
+      document.getElementById('polaroid1-slot').src = PHOTOS.polaroid1;
+      document.getElementById('polaroid2-slot').src = PHOTOS.polaroid2;
+      document.getElementById('polaroid3-slot').src = PHOTOS.polaroid3;
+      // Section D Will You Be Mine
+      document.getElementById('recent-photo-slot').src = PHOTOS.recent_photo;
+      // Section D Celebration Collage
+      document.getElementById('collage-center-slot').src = PHOTOS.collage_center;
+      document.getElementById('collage-left-slot').src = PHOTOS.collage_left;
+      document.getElementById('collage-right-slot').src = PHOTOS.collage_right;
+      // Section A Profile
+      document.getElementById('rudra-photo-slot').src = PHOTOS.rudra_photo;
+    }
+
+    // --- Generate Floating Background Elements ---
+    function spawnTeddies() {
+      const teddyCount = 15;
+      for (let i = 0; i < teddyCount; i++) {
+        const teddy = document.createElement('div');
+        teddy.classList.add('teddy');
+        teddy.textContent = '🧸';
+        teddy.style.left = `${Math.random() * 92 + 2}vw`;
+        teddy.style.top = `${Math.random() * 90 + 5}vh`;
+        teddy.style.fontSize = `${Math.random() * 1.5 + 1.5}rem`;
+        teddy.style.animationDelay = `${Math.random() * -6}s`;
+        teddy.style.animationDuration = `${Math.random() * 4 + 4}s`;
+        document.body.appendChild(teddy);
+      }
+    }
+
+    function spawnHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      const heartsList = ['❤️', '💕', '💗'];
+      heart.textContent = heartsList[Math.floor(Math.random() * heartsList.length)];
+      heart.style.left = `${Math.random() * 95 + 2.5}vw`;
+      heart.style.fontSize = `${Math.random() * 1.2 + 0.8}rem`;
+      
+      const driftX = `${Math.random() * 160 - 80}px`;
+      const driftRot = `${Math.random() * 360 - 180}deg`;
+      heart.style.setProperty('--drift-x', driftX);
+      heart.style.setProperty('--drift-rot', driftRot);
+      heart.style.animationDuration = `${Math.random() * 5 + 6}s`;
+      
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 11000);
+    }
+
+    function spawnPetals() {
+      const petal = document.createElement('div');
+      petal.classList.add('petal');
+      petal.textContent = '🌸';
+      petal.style.left = `${Math.random() * 95 + 2.5}vw`;
+      petal.style.top = `-20px`;
+      petal.style.fontSize = `${Math.random() * 0.8 + 0.6}rem`;
+      
+      const driftX = `${Math.random() * 150 - 75}px`;
+      const driftRot = `${Math.random() * 360 - 180}deg`;
+      
+      petal.style.setProperty('--drift-x', driftX);
+      petal.style.setProperty('--drift-rot', driftRot);
+      petal.style.animationDuration = `${Math.random() * 6 + 6}s`;
+      
+      document.body.appendChild(petal);
+      setTimeout(() => petal.remove(), 12000);
+    }
+
+    // --- Confetti Shapes ---
+    function spawnConfettiHeart() {
+      const confetti = document.createElement('div');
+      confetti.classList.add('confetti-heart');
+      
+      const shapes = ['♥', '✦', '🌸', '♥', '✨'];
+      const chosenShape = shapes[Math.floor(Math.random() * shapes.length)];
+      confetti.textContent = chosenShape;
+      
+      const colors = ['#EBA8B5', '#F2C4CE', '#FAD4DC', '#FFFAF8', '#D98898'];
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      confetti.style.color = color;
+      
+      if (chosenShape === '🌸' || chosenShape === '✨') {
+        confetti.style.filter = 'grayscale(100%) sepia(100%) hue-rotate(320deg) saturate(180%)';
+      } else {
+        confetti.style.textShadow = `0 0 5px ${color}`;
+      }
+      
+      confetti.style.left = `${Math.random() * 100}vw`;
+      confetti.style.fontSize = `${Math.random() * 1.5 + 1}rem`;
+      
+      const sway = `${Math.random() * 300 - 150}px`;
+      const rot = `${Math.random() * 720 - 360}deg`;
+      confetti.style.setProperty('--sway', sway);
+      confetti.style.setProperty('--rot', rot);
+      confetti.style.animationDuration = `${Math.random() * 3 + 3}s`;
+      
+      document.body.appendChild(confetti);
+      setTimeout(() => confetti.remove(), 6000);
+    }
+
+    function triggerHeartBurst() {
+      const burstCount = 40;
+      const centerX = window.innerWidth / 2;
+      const centerY = window.innerHeight / 2;
+      
+      for (let i = 0; i < burstCount; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('confetti-heart');
+        heart.textContent = '💖';
+        heart.style.left = `${centerX}px`;
+        heart.style.top = `${centerY}px`;
+        heart.style.fontSize = `${Math.random() * 1.5 + 1}rem`;
+        
+        const angle = (i / burstCount) * 2 * Math.PI;
+        const distance = Math.random() * 180 + 120;
+        const x = Math.cos(angle) * distance;
+        const y = Math.sin(angle) * distance;
+        
+        heart.style.setProperty('--sway-x', `${x}px`);
+        heart.style.setProperty('--sway-y', `${y}px`);
+        heart.style.setProperty('--rot', `${Math.random() * 360 - 180}deg`);
+        heart.style.filter = 'grayscale(100%) sepia(100%) hue-rotate(315deg) saturate(180%)';
+        
+        heart.style.animation = 'burstOut 1.2s cubic-bezier(0.1, 0.8, 0.3, 1) forwards';
+        
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 1200);
+      }
+    }
+
+    // --- Screen Transitions ---
+    function transitionScreen(fromId, toId) {
+      const fromEl = document.getElementById(fromId);
+      const toEl = document.getElementById(toId);
+      
+      fromEl.style.opacity = '0';
+      fromEl.style.transform = 'scale(0.8)';
+      
+      setTimeout(() => {
+        fromEl.style.display = 'none';
+        
+        toEl.style.display = 'flex';
+        setTimeout(() => {
+          toEl.style.opacity = '1';
+          toEl.style.transform = 'scale(1)';
+        }, 50);
+      }, 500);
+    }
+
+    // --- SCREEN 1: Password Lock Verification ---
+    const dobDay = document.getElementById('dobDay');
+    const dobMonth = document.getElementById('dobMonth');
+    const dobYear = document.getElementById('dobYear');
+
+    for (let i = 1; i <= 31; i++) {
+      const opt = document.createElement('option');
+      opt.value = i;
+      opt.textContent = i;
+      dobDay.appendChild(opt);
+    }
+
+    const months = [
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ];
+    months.forEach(m => {
+      const opt = document.createElement('option');
+      opt.value = m;
+      opt.textContent = m;
+      dobMonth.appendChild(opt);
+    });
+
+    for (let i = 2015; i >= 1990; i--) {
+      const opt = document.createElement('option');
+      opt.value = i;
+      opt.textContent = i;
+      dobYear.appendChild(opt);
+    }
+
+    document.getElementById('unlockBtn').addEventListener('click', (e) => {
+      e.preventDefault();
+      const d = dobDay.value;
+      const m = dobMonth.value;
+      const y = dobYear.value;
+      
+      // Target Password: 27 / September / 2008
+      if (d === '27' && m === 'September' && y === '2008') {
+        triggerHeartBurst();
+        document.getElementById('lockErrorMsg').style.display = 'none';
+        transitionScreen('screen1', 'hubScreen');
+      } else {
+        const errorEl = document.getElementById('lockErrorMsg');
+        errorEl.textContent = "Hmm... that doesn't seem right 🥺 Try again?";
+        errorEl.style.display = 'block';
+        
+        const card = document.getElementById('screen1');
+        card.style.animation = 'shake 0.5s ease';
+        setTimeout(() => {
+          card.style.animation = '';
+        }, 500);
+      }
+    });
+
+    // --- HUB PAGE NAVIGATORS ---
+    function openSection(sectionId) {
+      if (sectionId === 'sectionC') {
+        buildReasonsGrid();
+      }
+      transitionScreen('hubScreen', sectionId);
+    }
+
+    function backToHub(sectionId) {
+      if (sectionId === 'sectionA') {
+        document.getElementById('envelopeA').classList.remove('open');
+      } else if (sectionId === 'sectionB') {
+        document.getElementById('envelopeB').classList.remove('open');
+      }
+      transitionScreen(sectionId, 'hubScreen');
+    }
+
+    // --- SECTION A: Envelope Opening ---
+    const envelopeA = document.getElementById('envelopeA');
+    envelopeA.addEventListener('click', () => {
+      if (!envelopeA.classList.contains('open')) {
+        envelopeA.classList.add('open');
+      }
+    });
+
+    // --- SECTION B: Envelope Opening ---
+    const envelopeB = document.getElementById('envelopeB');
+    envelopeB.addEventListener('click', () => {
+      if (!envelopeB.classList.contains('open')) {
+        envelopeB.classList.add('open');
+      }
+    });
+
+    // --- SECTION C: Dynamic 12 Reasons flip grid ---
+    const reasons = [
+      "The way you smile without even trying 🌸",
+      "How you make everyone around you feel comfortable",
+      "Your laugh — it's my favourite sound 💕",
+      "The way you carry yourself with such grace",
+      "How kind you are, even when no one is watching",
+      "Your eyes — they say more than words ever could",
+      "The little things you do that you don't even notice",
+      "How you make ordinary moments feel special",
+      "Your voice — it just does something to me 🥺",
+      "The way you exist — effortlessly, beautifully",
+      "How you've unknowingly been in my thoughts every day",
+      "Just everything about you, Mihika Vatsa 💌"
+    ];
+
+    function buildReasonsGrid() {
+      const grid = document.querySelector('.reasons-grid');
+      grid.innerHTML = '';
+      let flippedSet = new Set();
+      
+      reasons.forEach((reason, index) => {
+        const card = document.createElement('div');
+        card.classList.add('flip-card');
+        
+        const frontFace = document.createElement('div');
+        frontFace.classList.add('card-face', 'face-front');
+        frontFace.innerHTML = `${index + 1}<span>❤️</span>`;
+        
+        const backFace = document.createElement('div');
+        backFace.classList.add('card-face', 'face-back');
+        backFace.textContent = reason;
+        
+        card.appendChild(frontFace);
+        card.appendChild(backFace);
+        
+        card.addEventListener('click', () => {
+          if (!card.classList.contains('flipped')) {
+            card.classList.add('flipped');
+            flippedSet.add(index);
+            
+            // Check if all 12 are flipped
+            if (flippedSet.size === reasons.length) {
+              setTimeout(() => {
+                const footer = document.getElementById('reasonsFooter');
+                footer.textContent = "And there are a hundred more reasons, Mihika 🌸";
+                footer.style.opacity = '1';
+              }, 600);
+            }
+          }
+        });
+        
+        grid.appendChild(card);
+      });
+    }
+
+    // --- SECTION D: Will You Be Mine rejections & Yes growth ---
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
+    const noMessage = document.getElementById('noMessage');
+    
+    let noAttemptCount = 0;
+    let yesScale = 1.0;
+
+    const noMessages = [
+      "Take a chance 🥺",
+      "Rudra really means it 💕",
+      "Come on, your heart knows 💗",
+      "Just one yes, that's all he needs 🌸",
+      "The teddies are rooting for you too 🧸",
+      "What if this is the start of something beautiful? ✨",
+      "You can't say no forever 😏💕",
+      "Rudra is waiting... patiently 💌",
+      "Okay fine... but the Yes button misses you 💔"
+    ];
+
+    function handleNoAttempt(e) {
+      e.preventDefault();
+      if (noAttemptCount >= 9) return;
+      
+      noMessage.style.opacity = '0';
+      
+      setTimeout(() => {
+        noMessage.textContent = noMessages[noAttemptCount] || noMessages[noMessages.length - 1];
+        noMessage.style.opacity = '1';
+        
+        noAttemptCount++;
+        yesScale += 0.25;
+        yesBtn.style.transform = `scale(${yesScale})`;
+        
+        if (noAttemptCount >= 9) {
+          noBtn.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+          noBtn.style.opacity = '0';
+          noBtn.style.transform = 'scale(0)';
+          noBtn.style.pointerEvents = 'none';
+          setTimeout(() => {
+            noBtn.style.display = 'none';
+          }, 500);
+        }
+      }, 150);
+    }
+
+    noBtn.addEventListener('pointerenter', handleNoAttempt);
+    noBtn.addEventListener('touchstart', handleNoAttempt);
+    noBtn.addEventListener('click', handleNoAttempt);
+
+    yesBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      triggerHeartBurst();
+      transitionScreen('sectionD', 'screen4');
+      
+      for (let i = 0; i < 90; i++) {
+        setTimeout(spawnConfettiHeart, i * 40);
+      }
+    });
+
+    // --- DATE PLANNER Calendar Rendering ---
+    let currentDate = new Date();
+    let selectedDate = null;
+
+    function renderCalendar() {
+      const monthYearEl = document.getElementById('calendarMonthYear');
+      const daysEl = document.getElementById('calendarDays');
+      
+      const year = currentDate.getFullYear();
+      const month = currentDate.getMonth();
+      
+      const monthNames = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+      ];
+      monthYearEl.textContent = `${monthNames[month]} ${year}`;
+      daysEl.innerHTML = '';
+      
+      const firstDayIndex = new Date(year, month, 1).getDay();
+      const lastDay = new Date(year, month + 1, 0).getDate();
+      
+      for (let i = 0; i < firstDayIndex; i++) {
+        const emptyCell = document.createElement('div');
+        daysEl.appendChild(emptyCell);
+      }
+      
+      const today = new Date();
+      today.setHours(0,0,0,0);
+      
+      for (let d = 1; d <= lastDay; d++) {
+        const dayCell = document.createElement('div');
+        dayCell.classList.add('calendar-day');
+        dayCell.textContent = d;
+        
+        const cellDate = new Date(year, month, d);
+        
+        if (cellDate < today) {
+          dayCell.classList.add('disabled');
+        } else {
+          if (selectedDate && 
+              selectedDate.getDate() === d && 
+              selectedDate.getMonth() === month && 
+              selectedDate.getFullYear() === year) {
+            dayCell.classList.add('active');
+            
+            const heartIndicator = document.createElement('span');
+            heartIndicator.textContent = '❤️';
+            heartIndicator.style.position = 'absolute';
+            heartIndicator.style.fontSize = '0.55rem';
+            heartIndicator.style.bottom = '1px';
+            heartIndicator.style.filter = 'grayscale(100%) sepia(100%) hue-rotate(315deg) saturate(180%)';
+            dayCell.appendChild(heartIndicator);
+          }
+          
+          dayCell.addEventListener('click', () => {
+            selectedDate = cellDate;
+            updateSelectedDateText();
+            renderCalendar();
+          });
+        }
+        daysEl.appendChild(dayCell);
+      }
+    }
+
+    function updateSelectedDateText() {
+      const textEl = document.getElementById('specialDayText');
+      if (selectedDate) {
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        textEl.textContent = `Our first date: ${selectedDate.toLocaleDateString('en-US', options)} 💕`;
+      } else {
+        textEl.textContent = "Our first date: [select a date] 💕";
+      }
+    }
+
+    document.getElementById('prevMonthBtn').addEventListener('click', (e) => {
+      e.preventDefault();
+      currentDate.setMonth(currentDate.getMonth() - 1);
+      renderCalendar();
+    });
+
+    document.getElementById('nextMonthBtn').addEventListener('click', (e) => {
+      e.preventDefault();
+      currentDate.setMonth(currentDate.getMonth() + 1);
+      renderCalendar();
+    });
+
+    // Time picker
+    let selectedTime = null;
+    const timeCards = document.querySelectorAll('.time-card');
+    timeCards.forEach(card => {
+      card.addEventListener('click', (e) => {
+        e.preventDefault();
+        timeCards.forEach(c => c.classList.remove('active'));
+        card.classList.add('active');
+        selectedTime = card.getAttribute('data-time');
+      });
+    });
+
+    // Place selector
+    let selectedPlace = null;
+    const placeCards = document.querySelectorAll('.place-card');
+    placeCards.forEach(card => {
+      card.addEventListener('click', (e) => {
+        e.preventDefault();
+        placeCards.forEach(c => c.classList.remove('active'));
+        card.classList.add('active');
+        selectedPlace = card.getAttribute('data-place');
+      });
+    });
+
+    // Confirmation Click
+    document.getElementById('confirmDateBtn').addEventListener('click', (e) => {
+      e.preventDefault();
+      
+      if (!selectedDate || !selectedTime || !selectedPlace) {
+        const confirmBtn = document.getElementById('confirmDateBtn');
+        confirmBtn.style.animation = 'shake 0.5s ease';
+        setTimeout(() => {
+          confirmBtn.style.animation = '';
+        }, 500);
+        
+        alert("Please select a date, time, and spot first! Let's lock in our perfect date! 💖");
+        return;
+      }
+      
+      const plannerScreen = document.getElementById('screen4');
+      plannerScreen.style.opacity = '0';
+      plannerScreen.style.transform = 'scale(0.8)';
+      
+      setTimeout(() => {
+        plannerScreen.style.display = 'none';
+        
+        const dateOptions = { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' };
+        const dateStr = selectedDate.toLocaleDateString('en-US', dateOptions);
+        
+        const finalMsgEl = document.getElementById('finalMessageText');
+        finalMsgEl.innerHTML = `It's official! 🌹 Rudra will meet Mihika Vatsa on <span style="color: var(--text-primary); text-shadow: 0 0 8px rgba(242, 196, 206, 0.4);">${dateStr}</span> in the <span style="color: var(--text-primary); text-shadow: 0 0 8px rgba(242, 196, 206, 0.4);">${selectedTime}</span> at <span style="color: var(--text-primary); text-shadow: 0 0 8px rgba(242, 196, 206, 0.4);">${selectedPlace}</span>.<br><br>Get ready for something magical, Mihika 💖✨<br><span style="font-size: 1.1rem; font-style: italic; color: var(--text-secondary);">— rudralovesmihikavatsa 🌸</span>`;
+        
+        const emailSubject = encodeURIComponent("Date Confirmed! 📅💖 - rudralovesmihikavatsa");
+        const emailBody = encodeURIComponent(
+          `Hi Rudra,\n\n` +
+          `Mihika Vatsa has locked in the date! 🌹 Here are the details of our first date:\n\n` +
+          `📅 Date: ${dateStr}\n` +
+          `⏰ Time: ${selectedTime}\n` +
+          `📍 Spot: ${selectedPlace}\n\n` +
+          `Get ready for something magical! ✨\n\n` +
+          `— rudralovesmihikavatsa 🌸`
+        );
+        const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${MY_GMAIL}&su=${emailSubject}&body=${emailBody}`;
+        
+        const gmailLinkBtn = document.getElementById('gmailLinkBtn');
+        gmailLinkBtn.href = gmailUrl;
+
+        const finalScreen = document.getElementById('finalConfirmationScreen');
+        finalScreen.style.display = 'flex';
+        
+        setTimeout(() => {
+          finalScreen.style.opacity = '1';
+          finalScreen.style.transform = 'scale(1)';
+        }, 50);
+        
+        for (let i = 0; i < 180; i++) {
+          setTimeout(spawnConfettiHeart, i * 35);
+        }
+
+        setTimeout(() => {
+          window.open(gmailUrl, '_blank');
+        }, 2200);
+      }, 500);
+    });
+
+    // Bootstrapping
+    window.addEventListener('DOMContentLoaded', () => {
+      initPhotoSlots();
+      spawnTeddies();
+      setInterval(spawnHeart, 950);
+      setInterval(spawnPetals, 1200);
+      renderCalendar();
+    });
+  </script>
+</body>
+</html>
