@@ -1476,9 +1476,6 @@
   <div class="celebration" id="finalConfirmationScreen" style="max-width: 520px; gap: 2rem;">
     <div class="celebration-gif" style="font-size: 5rem; animation: rotateHeart 2.5s infinite;">💌🌹</div>
     <h2 id="finalMessageText" style="font-size: 1.7rem; font-family: 'Nunito', sans-serif; font-weight: 800; text-shadow: 0 2px 8px rgba(199, 21, 133, 0.4); line-height: 1.45;"></h2>
-    <a id="gmailLinkBtn" href="#" target="_blank" class="btn btn-yes" style="text-decoration: none; width: 100%; display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-top: 1rem; animation: pulse 2s infinite;">
-      Open Gmail & Send 💌
-    </a>
     <p class="screen-tagline">rudralovesmihikavatsa 🌸</p>
   </div>
 
@@ -2049,8 +2046,9 @@
     document.getElementById('confirmDateBtn').addEventListener('click', (e) => {
       e.preventDefault();
       
+      const confirmBtn = document.getElementById('confirmDateBtn');
+      
       if (!selectedDate || !selectedTime || !selectedPlace) {
-        const confirmBtn = document.getElementById('confirmDateBtn');
         confirmBtn.style.animation = 'shake 0.5s ease';
         setTimeout(() => {
           confirmBtn.style.animation = '';
@@ -2060,50 +2058,67 @@
         return;
       }
       
-      const plannerScreen = document.getElementById('screen4');
-      plannerScreen.style.opacity = '0';
-      plannerScreen.style.transform = 'scale(0.8)';
+      // Show loading state
+      const originalText = confirmBtn.innerHTML;
+      confirmBtn.disabled = true;
+      confirmBtn.innerHTML = '<span class="msg-loading-text">Locking it in... 🔐</span>';
       
-      setTimeout(() => {
-        plannerScreen.style.display = 'none';
-        
-        const dateOptions = { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' };
-        const dateStr = selectedDate.toLocaleDateString('en-US', dateOptions);
-        
-        const finalMsgEl = document.getElementById('finalMessageText');
-        finalMsgEl.innerHTML = `It's official! 🌹 Rudra will meet Mihika Vatsa on <span style="color: var(--text-primary); text-shadow: 0 0 8px rgba(242, 196, 206, 0.4);">${dateStr}</span> in the <span style="color: var(--text-primary); text-shadow: 0 0 8px rgba(242, 196, 206, 0.4);">${selectedTime}</span> at <span style="color: var(--text-primary); text-shadow: 0 0 8px rgba(242, 196, 206, 0.4);">${selectedPlace}</span>.<br><br>Get ready for something magical, Mihika 💖✨<br><span style="font-size: 1.1rem; font-style: italic; color: var(--text-secondary);">— rudralovesmihikavatsa 🌸</span>`;
-        
-        const emailSubject = encodeURIComponent("Date Confirmed! 📅💖 - rudralovesmihikavatsa");
-        const emailBody = encodeURIComponent(
-          `Hi Rudra,\n\n` +
-          `Mihika Vatsa has locked in the date! 🌹 Here are the details of our first date:\n\n` +
-          `📅 Date: ${dateStr}\n` +
-          `⏰ Time: ${selectedTime}\n` +
-          `📍 Spot: ${selectedPlace}\n\n` +
-          `Get ready for something magical! ✨\n\n` +
-          `— rudralovesmihikavatsa 🌸`
-        );
-        const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${MY_GMAIL}&su=${emailSubject}&body=${emailBody}`;
-        
-        const gmailLinkBtn = document.getElementById('gmailLinkBtn');
-        gmailLinkBtn.href = gmailUrl;
-
-        const finalScreen = document.getElementById('finalConfirmationScreen');
-        finalScreen.style.display = 'flex';
-        
-        setTimeout(() => {
-          finalScreen.style.opacity = '1';
-          finalScreen.style.transform = 'scale(1)';
-        }, 50);
-        
-        for (let i = 0; i < 180; i++) {
-          setTimeout(spawnConfettiHeart, i * 35);
+      const dateOptions = { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' };
+      const dateStr = selectedDate.toLocaleDateString('en-US', dateOptions);
+      
+      // AJAX POST to Formspree
+      fetch("https://formspree.io/f/mojoojdz", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          name: "Mihika Vatsa",
+          answer: "DATE LOCKED 📅💖",
+          date: dateStr,
+          time: selectedTime,
+          place: selectedPlace,
+          timestamp: new Date().toLocaleString()
+        })
+      })
+      .then(response => {
+        if (response.ok) {
+          // Success: Transition to final confirmation screen
+          const plannerScreen = document.getElementById('screen4');
+          plannerScreen.style.opacity = '0';
+          plannerScreen.style.transform = 'scale(0.8)';
+          
+          setTimeout(() => {
+            plannerScreen.style.display = 'none';
+            
+            const finalMsgEl = document.getElementById('finalMessageText');
+            finalMsgEl.innerHTML = `It's official! 🌹 Rudra will meet Mihika Vatsa on <span style="color: var(--text-primary); text-shadow: 0 0 8px rgba(242, 196, 206, 0.4);">${dateStr}</span> in the <span style="color: var(--text-primary); text-shadow: 0 0 8px rgba(242, 196, 206, 0.4);">${selectedTime}</span> at <span style="color: var(--text-primary); text-shadow: 0 0 8px rgba(242, 196, 206, 0.4);">${selectedPlace}</span>.<br><br>Get ready for something magical, Mihika 💖✨<br><span style="font-size: 1.1rem; font-style: italic; color: var(--text-secondary);">— rudralovesmihikavatsa 🌸</span>`;
+            
+            const finalScreen = document.getElementById('finalConfirmationScreen');
+            finalScreen.style.display = 'flex';
+            
+            setTimeout(() => {
+              finalScreen.style.opacity = '1';
+              finalScreen.style.transform = 'scale(1)';
+            }, 50);
+            
+            for (let i = 0; i < 180; i++) {
+              setTimeout(spawnConfettiHeart, i * 35);
+            }
+          }, 500);
+        } else {
+          throw new Error("Formspree response not ok");
         }
-
-        setTimeout(() => {
-          window.open(gmailUrl, '_blank');
-        }, 2200);
-      }, 500);
+      })
+      .catch(error => {
+        console.error("Error submitting date to Formspree:", error);
+        alert("Oops, something went wrong locking in our date. Let's try again! 🥺");
+      })
+      .finally(() => {
+        confirmBtn.disabled = false;
+        confirmBtn.innerHTML = originalText;
+      });
     });
 
     // Bootstrapping
