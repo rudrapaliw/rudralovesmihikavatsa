@@ -1129,6 +1129,309 @@
         transform: scale(0.76);
       }
     }
+
+    /* --- Custom Full-Screen Letter Overlay --- */
+    .letter-overlay {
+      position: fixed !important;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      max-width: none !important;
+      border-radius: 0 !important;
+      background: rgba(253, 246, 240, 0.88) !important; /* lychee milky white, semi-transparent to see background elements */
+      backdrop-filter: blur(8px) !important;
+      -webkit-backdrop-filter: blur(8px) !important;
+      border: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      z-index: 2000 !important;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* Close Button (top left) */
+    .letter-close-btn {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: rgba(255, 255, 255, 0.85);
+      border: 2px solid var(--accent-main);
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      font-size: 20px;
+      color: #5C3040;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 2100;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 4px 10px rgba(125, 78, 87, 0.1);
+    }
+    .letter-close-btn:hover {
+      background: #FFF;
+      transform: scale(1.1) rotate(90deg);
+      color: var(--text-primary);
+    }
+
+    /* Letter Opening Stage */
+    #letterOpeningStage {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      perspective: 1200px;
+    }
+
+    /* Letter Envelope */
+    .letter-envelope {
+      position: absolute;
+      width: 320px;
+      height: 200px;
+      background-color: var(--bg-secondary);
+      border-radius: 0 0 15px 15px;
+      box-shadow: 0 15px 35px rgba(125, 78, 87, 0.15);
+      transform-style: preserve-3d;
+      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
+      border: 1px solid rgba(242, 196, 206, 0.35);
+      z-index: 2010;
+    }
+
+    .letter-envelope .env-flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 105px 160px 0 160px;
+      border-color: #f7d6dc transparent transparent transparent;
+      transform-origin: top;
+      z-index: 2015;
+      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.3s ease;
+    }
+
+    .letter-envelope .env-heart {
+      position: absolute;
+      top: 90px;
+      left: 145px;
+      font-size: 1.8rem;
+      z-index: 2016;
+      transition: opacity 0.4s ease;
+      filter: grayscale(100%) sepia(100%) hue-rotate(315deg) saturate(180%) brightness(110%);
+    }
+
+    .letter-envelope .env-front {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 160px 105px 160px;
+      border-color: transparent transparent #f7d6dc transparent;
+      z-index: 2014;
+      border-radius: 0 0 15px 15px;
+    }
+
+    .letter-envelope::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 100px 160px 100px 0;
+      border-color: transparent #fce6ea transparent transparent;
+      z-index: 2013;
+    }
+
+    .letter-envelope::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 100px 0 100px 160px;
+      border-color: transparent transparent transparent #fce6ea;
+      z-index: 2013;
+    }
+
+    /* Full Letter Paper */
+    .full-letter-paper {
+      position: absolute;
+      width: 300px;
+      height: 180px;
+      background-color: #FFFAF8; /* cream white */
+      background-image: radial-gradient(rgba(242, 196, 206, 0.15) 12%, transparent 13%),
+                        radial-gradient(rgba(242, 196, 206, 0.15) 12%, transparent 13%);
+      background-size: 16px 16px;
+      background-position: 0 0, 8px 8px; /* slight paper texture feel */
+      border-radius: 12px;
+      border: 3px double #F8C8D4; /* soft pink border */
+      z-index: 2009;
+      padding: 25px;
+      box-shadow: 0 10px 25px rgba(125, 78, 87, 0.1);
+      transition: all 1s cubic-bezier(0.25, 1, 0.5, 1);
+      transform: translateY(10px) scale(0.95);
+      opacity: 0;
+      overflow-y: auto;
+      max-height: 90vh;
+    }
+
+    /* Animated Stages */
+    #letterOpeningStage.stage-closed .letter-envelope .env-flap {
+      transform: rotateX(0deg);
+    }
+
+    #letterOpeningStage.stage-opening .letter-envelope .env-flap {
+      transform: rotateX(180deg);
+      z-index: 2005;
+    }
+    #letterOpeningStage.stage-opening .letter-envelope .env-heart {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    #letterOpeningStage.stage-sliding .letter-envelope .env-flap {
+      transform: rotateX(180deg);
+      z-index: 2005;
+    }
+    #letterOpeningStage.stage-sliding .letter-envelope .env-heart {
+      opacity: 0;
+    }
+    #letterOpeningStage.stage-sliding .full-letter-paper {
+      transform: translateY(-135px) scale(0.98);
+      opacity: 1;
+      z-index: 2020;
+    }
+
+    #letterOpeningStage.stage-expanded .letter-envelope {
+      opacity: 0;
+      transform: translateY(250px) scale(0.8);
+      pointer-events: none;
+    }
+    #letterOpeningStage.stage-expanded .full-letter-paper {
+      width: 90%;
+      max-width: 680px;
+      height: 80vh;
+      transform: translateY(0) scale(1);
+      opacity: 1;
+      z-index: 2030;
+      padding: 3.5rem 3rem;
+      box-shadow: 0 20px 50px rgba(125, 78, 87, 0.15);
+    }
+
+    @media (max-width: 600px) {
+      #letterOpeningStage.stage-expanded .full-letter-paper {
+        padding: 2.2rem 1.6rem;
+        height: 84vh;
+      }
+    }
+
+    /* Polaroid photo tucked in top right */
+    .letter-photo-tucked {
+      float: right;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 3px solid #FFF;
+      outline: 2px solid #F8C8D4; /* circular frame, soft pink border */
+      box-shadow: 0 4px 10px rgba(125, 78, 87, 0.12);
+      overflow: hidden;
+      margin-left: 20px;
+      margin-bottom: 15px;
+      transform: rotate(3deg);
+      transition: transform 0.5s ease;
+      position: relative;
+    }
+    .letter-photo-tucked:hover {
+      transform: rotate(-3deg) scale(1.08);
+    }
+    .letter-photo-tucked img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Handwriting styles */
+    .letter-paper-text {
+      font-family: 'Dancing Script', cursive;
+      font-size: 22px;
+      color: #5C3040; /* deep rose */
+      line-height: 2; /* spacious and breathable */
+      text-align: left;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    /* Blinking Cursor */
+    .blinking-cursor {
+      font-weight: bold;
+      color: #5C3040;
+      animation: cursorBlink 0.8s infinite;
+    }
+    @keyframes cursorBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* Letter bottom elements */
+    .letter-signature-area {
+      margin-top: 2rem;
+      text-align: left;
+    }
+    .soft-separator {
+      border: 0;
+      height: 1px;
+      background-image: linear-gradient(to right, transparent, rgba(92, 48, 64, 0.25), transparent);
+      margin-bottom: 1.5rem;
+    }
+    .signature-line {
+      font-family: 'Dancing Script', cursive;
+      font-size: 26px;
+      color: #5C3040;
+      font-weight: bold;
+      text-align: right;
+      margin-bottom: 0.5rem;
+    }
+    .tagline-line {
+      font-size: 0.95rem;
+      color: rgba(92, 48, 64, 0.6);
+      text-align: right;
+      font-weight: bold;
+      margin-bottom: 2.2rem;
+      transition: opacity 1s ease;
+    }
+    .btn-back-menu {
+      background: linear-gradient(135deg, #FFF0F5 0%, #F8C8D4 100%);
+      border: 1px solid rgba(92, 48, 64, 0.2);
+      padding: 0.8rem 2.2rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border-radius: 50px;
+      color: #5C3040;
+      cursor: pointer;
+      box-shadow: 0 8px 15px rgba(125, 78, 87, 0.1);
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      display: block;
+      margin: 0 auto;
+    }
+    .btn-back-menu:hover {
+      background: linear-gradient(135deg, #FFF 0%, #FFF0F5 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(125, 78, 87, 0.15);
+    }
   </style>
 </head>
 <body>
@@ -1236,60 +1539,38 @@
   <!-- ============================ -->
   <!-- SECTION B: CONFESSION LETTER -->
   <!-- ============================ -->
-  <div class="card envelope-card" id="sectionB" style="display: none; opacity: 0; transform: scale(0.8); max-width: 850px; padding: 2.5rem 1.8rem;">
-    <h2 class="planner-title">A Letter for You... 📜</h2>
-    
-    <div class="letter-section-container">
+  <div class="letter-overlay" id="sectionB" style="display: none; opacity: 0;">
+    <!-- Small X button in top left corner, always visible -->
+    <button class="letter-close-btn" onclick="backToHub('sectionB')">✕</button>
+
+    <!-- Stage containing envelope and letter -->
+    <div id="letterOpeningStage" class="stage-closed">
       <!-- Envelope -->
-      <div class="envelope-wrapper" id="envelopeB" style="margin: 20px 0;">
-        <div class="envelope-flap"></div>
-        <div class="envelope-heart">😋</div>
-        <div class="envelope-front"></div>
-        <div class="letter-paper">
-          <div class="letter-content">
-            <p>Dear Mihika Vatsa,</p>
-            <br>
-            <p>I don't know where to begin, because some feelings are too big for words. But I've been carrying this in my heart for so long, and today I finally have the courage to say it.</p>
-            <br>
-            <p>You are the kind of person who makes ordinary moments feel like magic. The way you laugh, the way you talk, the way you just exist — it does something to me that I can't explain.</p>
-            <br>
-            <p>I think about you more than I should. And honestly? I don't want to stop.</p>
-            <br>
-            <p>I'm Rudra. And I think I'm completely, helplessly falling for you.</p>
-            <br>
-            <p>This isn't just a confession. It's me hoping, with my whole heart, that maybe — just maybe — you feel something too.</p>
-            <br>
-            <p style="text-align: right;">With every heartbeat,</p>
-            <p style="text-align: right; font-weight: bold; margin-bottom: 20px;">Rudra 💌</p>
-          </div>
-        </div>
+      <div class="letter-envelope" id="envB">
+        <div class="env-flap"></div>
+        <div class="env-heart">😋</div>
+        <div class="env-front"></div>
       </div>
-      
-      <!-- Polaroids stack on the right -->
-      <div class="polaroids-stack">
-        <div class="polaroid-frame polaroid-tilt-left">
-          <div class="polaroid-photo-wrapper">
-            <img id="polaroid1-slot" src="" alt="Little Mihika" class="polaroid-image">
-          </div>
-          <p class="polaroid-caption">Little Mihika 🧸</p>
+
+      <!-- The Letter Paper -->
+      <div class="full-letter-paper" id="paperB">
+        <!-- Photo tucked in top right corner -->
+        <div class="letter-photo-tucked">
+          <img id="polaroid3-slot-letter" src="" alt="Mihika" />
         </div>
-        <div class="polaroid-frame polaroid-tilt-right">
-          <div class="polaroid-photo-wrapper">
-            <img id="polaroid2-slot" src="" alt="School Days" class="polaroid-image">
-          </div>
-          <p class="polaroid-caption">School days 📚</p>
-        </div>
-        <div class="polaroid-frame polaroid-tilt-straight">
-          <div class="polaroid-photo-wrapper">
-            <img id="polaroid3-slot" src="" alt="Favorite Person" class="polaroid-image">
-          </div>
-          <p class="polaroid-caption">My favourite person 😋</p>
+
+        <!-- Typing content container -->
+        <div class="letter-paper-text" id="letterTextB"></div>
+        
+        <!-- Signature area -->
+        <div class="letter-signature-area" id="signatureAreaB" style="display: none;">
+          <hr class="soft-separator">
+          <div class="signature-line" id="sigLineB"></div>
+          <div class="tagline-line" id="taglineB" style="opacity: 0;">rudralovesmihikavatsa 🌸</div>
+          <button class="btn-back-menu" id="backToMenuBtnB" onclick="backToHub('sectionB')" style="display: none; opacity: 0; transform: translateY(10px);">Back to menu 🌸</button>
         </div>
       </div>
     </div>
-    
-    <button class="btn btn-yes" onclick="backToHub('sectionB')" style="width: 100%; margin-top: 1.5rem;">Back to menu 🌸</button>
-    <p class="screen-tagline">rudralovesmihikavatsa 🌸</p>
   </div>
 
   <!-- ============================ -->
@@ -1505,10 +1786,18 @@
       document.querySelectorAll('.childhood-photo-slot').forEach(img => {
         img.src = PHOTOS.childhood_photo;
       });
-      // Section B Polaroids
-      document.getElementById('polaroid1-slot').src = PHOTOS.polaroid1;
-      document.getElementById('polaroid2-slot').src = PHOTOS.polaroid2;
-      document.getElementById('polaroid3-slot').src = PHOTOS.polaroid3;
+      // Section B Polaroids (safe check since we replaced the polaroids stack in Section B)
+      const p1 = document.getElementById('polaroid1-slot');
+      if (p1) p1.src = PHOTOS.polaroid1;
+      const p2 = document.getElementById('polaroid2-slot');
+      if (p2) p2.src = PHOTOS.polaroid2;
+      const p3 = document.getElementById('polaroid3-slot');
+      if (p3) p3.src = PHOTOS.polaroid3;
+      
+      // New Tucked Polaroid
+      const p3Letter = document.getElementById('polaroid3-slot-letter');
+      if (p3Letter) p3Letter.src = PHOTOS.polaroid3;
+
       // Section D Will You Be Mine
       document.getElementById('recent-photo-slot').src = PHOTOS.recent_photo;
       // Section D Celebration Collage
@@ -1710,9 +1999,155 @@
     });
 
     // --- HUB PAGE NAVIGATORS ---
+    // --- HUB PAGE NAVIGATORS ---
+    let typingTimer = null;
+    const letterTextContent = `Dear Mihika,
+
+I don't even know where to start...
+
+Because some feelings are just too big for words.
+But I've been carrying this in my heart for so long,
+and today I finally found the courage.
+
+You are the kind of person who makes everything feel different.
+The way you smile, the way you talk, the way you just exist —
+it does something to me that I can not explain.
+
+I think about you more than I should.
+And honestly? I don't ever want to stop.
+
+I am Rudra. And I think I am completely,
+helplessly falling for you.
+
+This is not just a confession.
+This is me hoping, with my whole heart,
+that maybe — just maybe — you feel something too.
+
+With every heartbeat,`;
+
+    function startLetterSequence() {
+      const stage = document.getElementById('letterOpeningStage');
+      const paper = document.getElementById('paperB');
+      const letterText = document.getElementById('letterTextB');
+      const sigArea = document.getElementById('signatureAreaB');
+      const sigLine = document.getElementById('sigLineB');
+      const tagline = document.getElementById('taglineB');
+      const backBtn = document.getElementById('backToMenuBtnB');
+      
+      // Clear any existing typing or animations
+      if (typingTimer) {
+        clearInterval(typingTimer);
+        typingTimer = null;
+      }
+      
+      // Reset elements
+      stage.className = 'stage-closed';
+      letterText.innerHTML = '';
+      sigArea.style.display = 'none';
+      sigLine.innerHTML = '';
+      tagline.style.opacity = '0';
+      backBtn.style.display = 'none';
+      backBtn.style.opacity = '0';
+      backBtn.style.transform = 'translateY(10px)';
+      paper.scrollTop = 0;
+      
+      // Sequence: Closed -> Opening (0.5s) -> Sliding (0.8s) -> Expanded (1.0s) -> Typewriter (1.2s)
+      setTimeout(() => {
+        stage.className = 'stage-opening';
+        
+        setTimeout(() => {
+          stage.className = 'stage-sliding';
+          
+          setTimeout(() => {
+            stage.className = 'stage-expanded';
+            
+            setTimeout(() => {
+              startTypewriterEffect();
+            }, 1200); // 1.2s transition and pause
+          }, 1000);
+        }, 800);
+      }, 500);
+    }
+
+    function startTypewriterEffect() {
+      const letterText = document.getElementById('letterTextB');
+      const paper = document.getElementById('paperB');
+      
+      let index = 0;
+      // Add cursor
+      const cursor = document.createElement('span');
+      cursor.className = 'blinking-cursor';
+      cursor.textContent = '|';
+      letterText.appendChild(cursor);
+      
+      typingTimer = setInterval(() => {
+        if (index < letterTextContent.length) {
+          const char = letterTextContent.charAt(index);
+          cursor.insertAdjacentText('beforebegin', char);
+          index++;
+          paper.scrollTop = paper.scrollHeight;
+        } else {
+          clearInterval(typingTimer);
+          typingTimer = null;
+          
+          cursor.style.transition = 'opacity 0.5s';
+          cursor.style.opacity = '0';
+          setTimeout(() => {
+            cursor.remove();
+            showSignatureAndButton();
+          }, 500);
+        }
+      }, 35);
+    }
+
+    function showSignatureAndButton() {
+      const sigArea = document.getElementById('signatureAreaB');
+      const sigLine = document.getElementById('sigLineB');
+      const tagline = document.getElementById('taglineB');
+      const backBtn = document.getElementById('backToMenuBtnB');
+      const paper = document.getElementById('paperB');
+      
+      sigArea.style.display = 'block';
+      paper.scrollTop = paper.scrollHeight;
+      
+      const sigText = "— Rudra 💌";
+      let sigIndex = 0;
+      
+      const sigCursor = document.createElement('span');
+      sigCursor.className = 'blinking-cursor';
+      sigCursor.textContent = '|';
+      sigLine.appendChild(sigCursor);
+      
+      const sigTimer = setInterval(() => {
+        if (sigIndex < sigText.length) {
+          sigCursor.insertAdjacentText('beforebegin', sigText.charAt(sigIndex));
+          sigIndex++;
+          paper.scrollTop = paper.scrollHeight;
+        } else {
+          clearInterval(sigTimer);
+          sigCursor.remove();
+          
+          tagline.style.transition = 'opacity 0.8s ease';
+          tagline.style.opacity = '1';
+          paper.scrollTop = paper.scrollHeight;
+          
+          backBtn.style.display = 'block';
+          setTimeout(() => {
+            backBtn.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            backBtn.style.opacity = '1';
+            backBtn.style.transform = 'translateY(0)';
+            paper.scrollTop = paper.scrollHeight;
+          }, 300);
+        }
+      }, 80);
+    }
+
     function openSection(sectionId) {
       if (sectionId === 'sectionC') {
         buildReasonsGrid();
+      }
+      if (sectionId === 'sectionB') {
+        startLetterSequence();
       }
       transitionScreen('hubScreen', sectionId);
     }
@@ -1721,7 +2156,11 @@
       if (sectionId === 'sectionA') {
         document.getElementById('envelopeA').classList.remove('open');
       } else if (sectionId === 'sectionB') {
-        document.getElementById('envelopeB').classList.remove('open');
+        document.getElementById('letterOpeningStage').className = 'stage-closed';
+        if (typingTimer) {
+          clearInterval(typingTimer);
+          typingTimer = null;
+        }
       } else if (sectionId === 'messageBoxScreen') {
         document.getElementById('mihikaMessage').value = '';
         document.getElementById('messageErrorArea').style.display = 'none';
@@ -1735,14 +2174,6 @@
     envelopeA.addEventListener('click', () => {
       if (!envelopeA.classList.contains('open')) {
         envelopeA.classList.add('open');
-      }
-    });
-
-    // --- SECTION B: Envelope Opening ---
-    const envelopeB = document.getElementById('envelopeB');
-    envelopeB.addEventListener('click', () => {
-      if (!envelopeB.classList.contains('open')) {
-        envelopeB.classList.add('open');
       }
     });
 
