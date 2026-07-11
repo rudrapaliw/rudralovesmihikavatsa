@@ -1432,6 +1432,30 @@
       transform: translateY(-2px);
       box-shadow: 0 10px 20px rgba(125, 78, 87, 0.15);
     }
+
+    /* --- Our Story Screen --- */
+    #storyTextContainer p {
+      margin-bottom: 1.4rem;
+      font-size: 1.25rem;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      color: #5C3040;
+      line-height: 1.8;
+      text-shadow: 0 1px 2px rgba(242, 196, 206, 0.2);
+    }
+    #storyTextContainer p:last-child {
+      margin-bottom: 0;
+    }
+    #storyTextContainer::-webkit-scrollbar {
+      width: 6px;
+    }
+    #storyTextContainer::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    #storyTextContainer::-webkit-scrollbar-thumb {
+      background: rgba(242, 196, 206, 0.6);
+      border-radius: 3px;
+    }
   </style>
 </head>
 <body>
@@ -1462,6 +1486,17 @@
     <p id="lockErrorMsg" style="color: var(--text-primary); font-weight: 800; font-size: 0.95rem; display: none; text-shadow: 0 1px 3px rgba(242, 196, 206, 0.3);"></p>
     
     <p class="screen-tagline">rudralovesmihikavatsa 🌸</p>
+  </div>
+
+  <!-- ============================ -->
+  <!-- SCREEN 1.5: OUR STORY (REEL) -->
+  <!-- ============================ -->
+  <div class="card" id="storyScreen" style="display: none; opacity: 0; transform: scale(0.8); max-width: 600px; padding: 3rem 2.2rem; gap: 1rem;">
+    <h2 class="planner-title" style="font-size: 1.8rem; margin-bottom: 0.5rem; text-shadow: 0 1px 2px rgba(242, 196, 206, 0.2);">Our Story... 📖</h2>
+    <div id="storyTextContainer" style="text-align: left; width: 100%; max-height: 380px; overflow-y: auto; padding-right: 8px;">
+      <!-- Lines will be dynamically typed here -->
+    </div>
+    <button class="btn btn-yes" id="storyNextBtn" onclick="goToHubFromStory()" style="display: none; opacity: 0; transform: translateY(10px); width: 100%; margin-top: 1rem;">Next 🌸</button>
   </div>
 
   <!-- ============================ -->
@@ -1984,7 +2019,10 @@
       if (d === '27' && m === 'September' && y === '2008') {
         triggerHeartBurst();
         document.getElementById('lockErrorMsg').style.display = 'none';
-        transitionScreen('screen1', 'hubScreen');
+        transitionScreen('screen1', 'storyScreen');
+        setTimeout(() => {
+          startStorySequence();
+        }, 500);
       } else {
         const errorEl = document.getElementById('lockErrorMsg');
         errorEl.textContent = "Hmm... that doesn't seem right 🥺 Try again?";
@@ -2551,6 +2589,104 @@ With every heartbeat,`;
         confirmBtn.innerHTML = originalText;
       });
     });
+
+    // --- OUR STORY CINEMATIC TYPEWRITER ---
+    const storyLines = [
+      { text: "Okay so you wanted to know the truth? 🥺", pause: 1400 },
+      { text: "I love you.", pause: 900 },
+      { text: "I adore you.", pause: 900 },
+      { text: "I am obsessed with you.", pause: 1400 },
+      { text: "Woh gusse wala cute sa face dekha tha...", pause: 1400 },
+      { text: "...aur bas ho gaya. 💕", pause: 1800 },
+      { text: "Pehle socha normal attraction hai...", pause: 1200 },
+      { text: "2-3 din mein bhool jaunga...", pause: 1500 },
+      { text: "But God had different plans 🌸", pause: 1800 },
+      { text: "From random chats to thinking about you every single second...", pause: 1600 },
+      { text: "Your smile, your voice, and the way you make me feel...", pause: 1600 },
+      { text: "It became the most beautiful part of my life. 🥺", pause: 2000 },
+      { text: "I don't just want you for today...", pause: 1200 },
+      { text: "I want you for all my tomorrows. ❤️", pause: 2000 },
+      { text: "And now, I have a few things to tell you...", pause: 1500 }
+    ];
+
+    let storyIndex = 0;
+    let storyTimer = null;
+
+    function startStorySequence() {
+      const container = document.getElementById('storyTextContainer');
+      const nextBtn = document.getElementById('storyNextBtn');
+      
+      container.innerHTML = '';
+      nextBtn.style.display = 'none';
+      nextBtn.style.opacity = '0';
+      nextBtn.style.transform = 'translateY(10px)';
+      
+      storyIndex = 0;
+      if (storyTimer) {
+        clearTimeout(storyTimer);
+        storyTimer = null;
+      }
+      typeNextStoryLine();
+    }
+
+    function typeNextStoryLine() {
+      if (storyIndex >= storyLines.length) {
+        showStoryNextButton();
+        return;
+      }
+      
+      const container = document.getElementById('storyTextContainer');
+      const lineObj = storyLines[storyIndex];
+      
+      const p = document.createElement('p');
+      p.style.opacity = '0';
+      p.style.transition = 'opacity 0.3s ease';
+      container.appendChild(p);
+      
+      setTimeout(() => {
+        p.style.opacity = '1';
+      }, 30);
+
+      const cursor = document.createElement('span');
+      cursor.className = 'blinking-cursor';
+      cursor.textContent = '|';
+      p.appendChild(cursor);
+      
+      let charIndex = 0;
+      const text = lineObj.text;
+      
+      const charTimer = setInterval(() => {
+        if (charIndex < text.length) {
+          cursor.insertAdjacentText('beforebegin', text.charAt(charIndex));
+          charIndex++;
+          container.scrollTop = container.scrollHeight;
+        } else {
+          clearInterval(charTimer);
+          cursor.remove();
+          
+          storyIndex++;
+          storyTimer = setTimeout(() => {
+            typeNextStoryLine();
+          }, lineObj.pause);
+        }
+      }, 40);
+    }
+
+    function showStoryNextButton() {
+      const nextBtn = document.getElementById('storyNextBtn');
+      nextBtn.style.display = 'block';
+      setTimeout(() => {
+        nextBtn.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+        nextBtn.style.opacity = '1';
+        nextBtn.style.transform = 'translateY(0)';
+        const container = document.getElementById('storyTextContainer');
+        container.scrollTop = container.scrollHeight;
+      }, 200);
+    }
+
+    function goToHubFromStory() {
+      transitionScreen('storyScreen', 'hubScreen');
+    }
 
     // Bootstrapping
     window.addEventListener('DOMContentLoaded', () => {
