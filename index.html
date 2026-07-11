@@ -2617,71 +2617,20 @@ With every heartbeat,`;
       const nextBtn = document.getElementById('storyNextBtn');
       
       container.innerHTML = '';
-      nextBtn.style.display = 'none';
-      nextBtn.style.opacity = '0';
-      nextBtn.style.transform = 'translateY(10px)';
       
-      storyIndex = 0;
-      if (storyTimer) {
-        clearTimeout(storyTimer);
-        storyTimer = null;
-      }
-      typeNextStoryLine();
-    }
-
-    function typeNextStoryLine() {
-      if (storyIndex >= storyLines.length) {
-        showStoryNextButton();
-        return;
-      }
-      
-      const container = document.getElementById('storyTextContainer');
-      const lineObj = storyLines[storyIndex];
-      
-      const p = document.createElement('p');
-      p.style.opacity = '0';
-      p.style.transition = 'opacity 0.3s ease';
-      container.appendChild(p);
-      
-      setTimeout(() => {
+      storyLines.forEach(lineObj => {
+        const p = document.createElement('p');
+        p.textContent = lineObj.text;
+        p.style.marginBottom = '1.4rem';
         p.style.opacity = '1';
-      }, 30);
-
-      const cursor = document.createElement('span');
-      cursor.className = 'blinking-cursor';
-      cursor.textContent = '|';
-      p.appendChild(cursor);
+        container.appendChild(p);
+      });
       
-      let charIndex = 0;
-      const text = lineObj.text;
-      
-      const charTimer = setInterval(() => {
-        if (charIndex < text.length) {
-          cursor.insertAdjacentText('beforebegin', text.charAt(charIndex));
-          charIndex++;
-          container.scrollTop = container.scrollHeight;
-        } else {
-          clearInterval(charTimer);
-          cursor.remove();
-          
-          storyIndex++;
-          storyTimer = setTimeout(() => {
-            typeNextStoryLine();
-          }, lineObj.pause);
-        }
-      }, 40);
-    }
-
-    function showStoryNextButton() {
-      const nextBtn = document.getElementById('storyNextBtn');
       nextBtn.style.display = 'block';
-      setTimeout(() => {
-        nextBtn.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-        nextBtn.style.opacity = '1';
-        nextBtn.style.transform = 'translateY(0)';
-        const container = document.getElementById('storyTextContainer');
-        container.scrollTop = container.scrollHeight;
-      }, 200);
+      nextBtn.style.opacity = '1';
+      nextBtn.style.transform = 'translateY(0)';
+      
+      container.scrollTop = 0;
     }
 
     function goToHubFromStory() {
