@@ -41,13 +41,13 @@
       -webkit-tap-highlight-color: transparent;
     }
 
-    /* Fullscreen lychee gradient background */
+    /* Fullscreen lychee gradient background - minimal design */
     body {
       min-height: 100vh;
       width: 100vw;
       overflow-x: hidden;
       font-family: 'Nunito', sans-serif;
-      background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, #FFF0F5 100%);
+      background: linear-gradient(135deg, #FDF6F0 0%, #FFF5F7 50%, #FDF0F5 100%);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -55,101 +55,31 @@
       padding: 1.5rem 0;
     }
 
-    /* Subtle texture overlay for lychee skin / silk feel */
+    /* Subtle watercolor blobs in corners - static, minimal, opacity: 0.06 */
     body::before {
       content: "";
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0.04;
+      top: -10%;
+      left: -10%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, #F2C4CE 0%, transparent 70%);
+      opacity: 0.06;
       pointer-events: none;
       z-index: 0;
-      background-image: 
-        radial-gradient(var(--text-primary) 1px, transparent 0),
-        radial-gradient(var(--text-primary) 1px, transparent 0);
-      background-size: 8px 8px;
-      background-position: 0 0, 4px 4px;
     }
 
-    /* --- Floating Background Emojis --- */
-    .teddy {
-      position: fixed;
+    body::after {
+      content: "";
+      position: absolute;
+      bottom: -10%;
+      right: -10%;
+      width: 450px;
+      height: 450px;
+      background: radial-gradient(circle, #EBA8B5 0%, transparent 70%);
+      opacity: 0.06;
       pointer-events: none;
-      z-index: 1;
-      animation: bobbing 6s ease-in-out infinite alternate;
-      will-change: transform;
-      filter: grayscale(100%) sepia(100%) hue-rotate(315deg) saturate(180%) brightness(110%);
-      opacity: 0.55;
-    }
-
-    @keyframes bobbing {
-      0% {
-        transform: translateY(0) rotate(0deg);
-      }
-      50% {
-        transform: translateY(-15px) rotate(5deg);
-      }
-      100% {
-        transform: translateY(5px) rotate(-5deg);
-      }
-    }
-
-    .heart {
-      position: fixed;
-      bottom: -50px;
-      pointer-events: none;
-      z-index: 2;
-      animation: floatUp 8s linear forwards;
-      will-change: transform, opacity;
-      filter: grayscale(100%) sepia(100%) hue-rotate(315deg) saturate(180%) brightness(110%);
-      opacity: 0.6;
-    }
-
-    @keyframes floatUp {
-      0% {
-        transform: translateY(0) translateX(0) rotate(0deg);
-        opacity: 0;
-      }
-      10% {
-        opacity: 0.6;
-      }
-      90% {
-        opacity: 0.6;
-      }
-      100% {
-        transform: translateY(-115vh) translateX(var(--drift-x)) rotate(var(--drift-rot));
-        opacity: 0;
-      }
-    }
-
-    /* --- Falling Cherry Blossom Petals --- */
-    .petal {
-      position: fixed;
-      pointer-events: none;
-      z-index: 2;
-      animation: fallDown 9s linear forwards;
-      will-change: transform, opacity;
-      filter: grayscale(100%) sepia(100%) hue-rotate(320deg) saturate(140%) brightness(120%);
-      opacity: 0.45;
-    }
-
-    @keyframes fallDown {
-      0% {
-        transform: translateY(-5vh) translateX(0) rotate(0deg);
-        opacity: 0;
-      }
-      10% {
-        opacity: 0.5;
-      }
-      90% {
-        opacity: 0.5;
-      }
-      100% {
-        transform: translateY(105vh) translateX(var(--drift-x)) rotate(var(--drift-rot));
-        opacity: 0;
-      }
+      z-index: 0;
     }
 
     /* --- Main Glassmorphic Cards --- */
@@ -1845,58 +1775,7 @@
       document.getElementById('messageBoxPhoto-slot').src = PHOTOS.recent_photo;
     }
 
-    // --- Generate Floating Background Elements ---
-    function spawnTeddies() {
-      const teddyCount = 15;
-      for (let i = 0; i < teddyCount; i++) {
-        const teddy = document.createElement('div');
-        teddy.classList.add('teddy');
-        teddy.textContent = '🧸';
-        teddy.style.left = `${Math.random() * 92 + 2}vw`;
-        teddy.style.top = `${Math.random() * 90 + 5}vh`;
-        teddy.style.fontSize = `${Math.random() * 1.5 + 1.5}rem`;
-        teddy.style.animationDelay = `${Math.random() * -6}s`;
-        teddy.style.animationDuration = `${Math.random() * 4 + 4}s`;
-        document.body.appendChild(teddy);
-      }
-    }
 
-    function spawnHeart() {
-      const heart = document.createElement('div');
-      heart.classList.add('heart');
-      const heartsList = ['😋', '😋', '😋'];
-      heart.textContent = heartsList[Math.floor(Math.random() * heartsList.length)];
-      heart.style.left = `${Math.random() * 95 + 2.5}vw`;
-      heart.style.fontSize = `${Math.random() * 1.2 + 0.8}rem`;
-      
-      const driftX = `${Math.random() * 160 - 80}px`;
-      const driftRot = `${Math.random() * 360 - 180}deg`;
-      heart.style.setProperty('--drift-x', driftX);
-      heart.style.setProperty('--drift-rot', driftRot);
-      heart.style.animationDuration = `${Math.random() * 5 + 6}s`;
-      
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 11000);
-    }
-
-    function spawnPetals() {
-      const petal = document.createElement('div');
-      petal.classList.add('petal');
-      petal.textContent = '🌸';
-      petal.style.left = `${Math.random() * 95 + 2.5}vw`;
-      petal.style.top = `-20px`;
-      petal.style.fontSize = `${Math.random() * 0.8 + 0.6}rem`;
-      
-      const driftX = `${Math.random() * 150 - 75}px`;
-      const driftRot = `${Math.random() * 360 - 180}deg`;
-      
-      petal.style.setProperty('--drift-x', driftX);
-      petal.style.setProperty('--drift-rot', driftRot);
-      petal.style.animationDuration = `${Math.random() * 6 + 6}s`;
-      
-      document.body.appendChild(petal);
-      setTimeout(() => petal.remove(), 12000);
-    }
 
     // --- Confetti Shapes ---
     function spawnConfettiHeart() {
@@ -2640,9 +2519,6 @@ With every heartbeat,`;
     // Bootstrapping
     window.addEventListener('DOMContentLoaded', () => {
       initPhotoSlots();
-      spawnTeddies();
-      setInterval(spawnHeart, 950);
-      setInterval(spawnPetals, 1200);
       renderCalendar();
     });
   </script>
