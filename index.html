@@ -1386,6 +1386,31 @@
       background: rgba(242, 196, 206, 0.6);
       border-radius: 3px;
     }
+
+    /* --- Screen 4 Postcard Styles --- */
+    .postcard-screen {
+      background: #FFFAF8 !important;
+      border: 1px solid #F2C4CE !important;
+      border-radius: 20px !important;
+      padding: 36px !important;
+      box-shadow: 0 8px 32px rgba(242,196,206,0.35) !important;
+    }
+    
+    @keyframes rotateHeart {
+      0% { transform: rotate(-5deg) scale(1); }
+      50% { transform: rotate(5deg) scale(1.08); }
+      100% { transform: rotate(-5deg) scale(1); }
+    }
+    
+    @keyframes pulseHeart {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.18); }
+    }
+
+    @keyframes zoomIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
   </style>
 </head>
 <body>
@@ -1419,310 +1444,83 @@
   </div>
 
   <!-- ============================ -->
-  <!-- SCREEN 1.5: OUR STORY (REEL) -->
+  <!-- SCREEN 2: DO YOU WANT TO HEAR? -->
   <!-- ============================ -->
-  <div class="card" id="storyScreen" style="display: none; opacity: 0; transform: scale(0.8); max-width: 600px; padding: 3rem 2.2rem; gap: 1rem;">
-    <h2 class="planner-title" style="font-size: 1.8rem; margin-bottom: 0.5rem; text-shadow: 0 1px 2px rgba(242, 196, 206, 0.2);">Our Story... 📖</h2>
-    <div id="storyTextContainer" style="text-align: left; width: 100%; max-height: 380px; overflow-y: auto; padding-right: 8px;">
-      <!-- Lines will be dynamically typed here -->
-    </div>
-    <button class="btn btn-yes" id="storyNextBtn" onclick="goToHubFromStory()" style="display: none; opacity: 0; transform: translateY(10px); width: 100%; margin-top: 1rem;">Next 🌸</button>
-  </div>
-
-  <!-- ============================ -->
-  <!-- SCREEN 2: HUB PAGE (MENU)    -->
-  <!-- ============================ -->
-  <div class="card" id="hubScreen" style="display: none; opacity: 0; transform: scale(0.8); max-width: 530px; gap: 1.5rem; padding: 2.5rem 1.8rem;">
-    <div class="profile-frame glow-frame" style="margin-top: 0.5rem;">
-      <img class="childhood-photo-slot" src="" alt="Mihika Vatsa" style="width: 100%; height: 100%; object-fit: cover;">
-    </div>
-    <h2 style="font-size: 2.1rem; line-height: 1.2;">Hey Mihika Vatsa 🌸</h2>
-    <p class="screen-tagline" style="margin-top: -1rem; font-size: 0.95rem; color: var(--text-secondary);">rudralovesmihikavatsa 😋</p>
+  <div class="card" id="screen2" style="display: none; opacity: 0; transform: scale(0.8); max-width: 500px; text-align: center; gap: 1.5rem; padding: 2.8rem 2rem;">
+    <p style="font-style: italic; color: var(--text-secondary); font-size: 1.05rem; margin-bottom: -0.5rem;">one more thing... 🥺</p>
+    <h2 style="font-family: 'Pacifico', cursive; color: #7D4E57; font-size: 1.8rem; line-height: 1.4; margin: 0.5rem 0;">Do you want to hear what's been<br>living in my heart all this time?</h2>
     
-    <div class="hub-grid">
-      <button class="hub-card bg-blush" onclick="openSection('sectionA')">
-        <span class="hub-icon">💌</span>
-        <h3 class="hub-card-title">Why I made this</h3>
-        <p class="hub-card-subtitle">A little note from Rudra</p>
-      </button>
-      <button class="hub-card bg-cream" onclick="openSection('sectionB')">
-        <span class="hub-icon">📜</span>
-        <h3 class="hub-card-title">A letter for you</h3>
-        <p class="hub-card-subtitle">Read when you're ready</p>
-      </button>
-      <button class="hub-card bg-lychee" onclick="openSection('sectionC')">
-        <span class="hub-icon">😋</span>
-        <h3 class="hub-card-title">Reasons I like you</h3>
-        <p class="hub-card-subtitle">Click to discover each one</p>
-      </button>
-      <button class="hub-card bg-mauve" onclick="openSection('sectionD')">
-        <span class="hub-icon">💍</span>
-        <h3 class="hub-card-title">The big question...</h3>
-        <p class="hub-card-subtitle">When you're ready, open last 🥺</p>
-      </button>
-    </div>
-    
-    <p class="screen-tagline" style="margin-top: 1rem;">rudralovesmihikavatsa 🌸</p>
-  </div>
-
-  <!-- ============================ -->
-  <!-- SECTION A: WHY I MADE THIS   -->
-  <!-- ============================ -->
-  <div class="card envelope-card" id="sectionA" style="display: none; opacity: 0; transform: scale(0.8);">
-    <h2 class="planner-title">Why I Made This... 💌</h2>
-    
-    <div class="envelope-wrapper" id="envelopeA">
-      <div class="envelope-flap"></div>
-      <div class="envelope-heart">😋</div>
-      <div class="envelope-front"></div>
-      <div class="letter-paper">
-        <div class="letter-content" style="padding-top: 5px;">
-          <!-- Rudra photo top right in letter -->
-          <div style="float: right; width: 62px; height: 62px; border-radius: 50%; overflow: hidden; border: 2px solid var(--accent-main); margin-left: 10px; margin-bottom: 5px; box-shadow: 0 0 8px rgba(242, 196, 206, 0.4);">
-            <img id="rudra-photo-slot" src="" alt="Rudra" style="width: 100%; height: 100%; object-fit: cover;">
-          </div>
-          <p>Dear Mihika,</p>
-          <br>
-          <p>You must be wondering why someone made an entire website just for you.</p>
-          <br>
-          <p>Honestly? Because you deserve more than just a text message. You deserve something that took time, thought, and a lot of nervousness to put together.</p>
-          <br>
-          <p>I wanted you to feel, even for a few minutes, how much you mean to someone.</p>
-          <br>
-          <p>This website is my way of saying — you are worth every effort.</p>
-          <br>
-          <p style="text-align: right;">With a hopeful heart,</p>
-          <p style="text-align: right; font-weight: bold; margin-bottom: 20px;">Rudra 💌</p>
-        </div>
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem; width: 100%; position: relative; min-height: 110px;">
+      <div style="display: flex; justify-content: center; align-items: center; gap: 1.2rem; width: 100%;">
+        <button class="btn btn-yes" id="screen2YesBtn" onclick="goToScreen3()">Yes 💕</button>
+        <button class="btn btn-no" id="screen2NoBtn" onclick="handleScreen2NoClick()">No 🙈</button>
       </div>
+      <p id="screen2NoMsg" style="color: var(--text-primary); font-weight: 700; font-size: 0.95rem; min-height: 24px; opacity: 0; transition: opacity 0.3s ease; margin-top: 0.2rem;"></p>
     </div>
     
-    <button class="btn btn-yes" onclick="backToHub('sectionA')" style="width: 100%; margin-top: 1.5rem;">Back to menu 🌸</button>
     <p class="screen-tagline">rudralovesmihikavatsa 🌸</p>
   </div>
 
   <!-- ============================ -->
-  <!-- SECTION B: CONFESSION LETTER -->
+  <!-- SCREEN 3: YOU HAD TO LISTEN  -->
   <!-- ============================ -->
-  <div class="letter-overlay" id="sectionB" style="display: none; opacity: 0;">
-    <!-- Small X button in top left corner, always visible -->
-    <button class="letter-close-btn" onclick="backToHub('sectionB')">✕</button>
-
-    <!-- Stage containing envelope and letter -->
-    <div id="letterOpeningStage" class="stage-closed">
-      <!-- Envelope -->
-      <div class="letter-envelope" id="envB">
-        <div class="env-flap"></div>
-        <div class="env-heart">😋</div>
-        <div class="env-front"></div>
-      </div>
-
-      <!-- The Letter Paper -->
-      <div class="full-letter-paper" id="paperB">
-        <!-- Photo tucked in top right corner -->
-        <div class="letter-photo-tucked">
-          <img id="polaroid3-slot-letter" src="" alt="Mihika" />
-        </div>
-
-        <!-- Typing content container -->
-        <div class="letter-paper-text" id="letterTextB"></div>
-        
-        <!-- Signature area -->
-        <div class="letter-signature-area" id="signatureAreaB" style="display: none;">
-          <hr class="soft-separator">
-          <div class="signature-line" id="sigLineB"></div>
-          <div class="tagline-line" id="taglineB" style="opacity: 0;">rudralovesmihikavatsa 🌸</div>
-          <button class="btn-back-menu" id="backToMenuBtnB" onclick="backToHub('sectionB')" style="display: none; opacity: 0; transform: translateY(10px);">Back to menu 🌸</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ============================ -->
-  <!-- SECTION C: REASONS I LIKE YOU-->
-  <!-- ============================ -->
-  <div class="card" id="sectionC" style="display: none; opacity: 0; transform: scale(0.8); max-width: 650px; padding: 2.2rem 1.6rem;">
-    <h2 class="planner-title" style="font-size: 2.1rem;">The reasons I like you, Mihika 😋</h2>
-    <p style="color: var(--text-secondary); font-weight: 700; margin-top: -0.8rem;">Tap each card to reveal 🌸</p>
+  <div class="card" id="screen3" style="display: none; opacity: 0; transform: scale(0.8); max-width: 500px; text-align: center; gap: 1.5rem; padding: 3rem 2rem;">
+    <h2 style="font-family: 'Pacifico', cursive; color: #7D4E57; font-size: 2.1rem; line-height: 1.3;">you had to listen to this.</h2>
+    <p style="font-family: 'Dancing Script', cursive; font-style: italic; font-size: 1.45rem; color: var(--text-secondary); margin-top: -0.5rem;">because maine bahut wait kiya hai. 🌸</p>
     
-    <div class="reasons-grid"></div>
+    <button class="btn btn-yes" id="screen3ContinueBtn" onclick="goToScreen4()" style="display: none; opacity: 0; transition: opacity 0.6s ease, transform 0.6s ease; width: 100%; margin-top: 1rem;">Continue 💌</button>
     
-    <p id="reasonsFooter" style="color: var(--text-primary); font-weight: 800; font-size: 1.1rem; min-height: 28px; opacity: 0; transition: opacity 0.5s ease; margin-top: 1rem; text-align: center; font-family: 'Nunito', sans-serif;"></p>
-    
-    <button class="btn btn-yes" onclick="backToHub('sectionC')" style="width: 100%; margin-top: 1.2rem;">Back to menu 🌸</button>
     <p class="screen-tagline">rudralovesmihikavatsa 🌸</p>
   </div>
 
   <!-- ============================ -->
-  <!-- SECTION D: WILL YOU BE MINE? -->
+  <!-- SCREEN 4: POSTCARD JOURNEY  -->
   <!-- ============================ -->
-  <div class="card" id="sectionD" style="display: none; opacity: 0; transform: scale(0.8);">
-    <div class="profile-frame glow-frame" style="margin-bottom: 0.5rem;">
-      <img id="recent-photo-slot" src="" alt="Mihika Recent" style="width: 100%; height: 100%; object-fit: cover;">
-    </div>
-    <h1 style="font-size: 2.5rem; line-height: 1.2;">Mihika Vatsa... 🌸</h1>
-    <h1 style="font-size: 2.1rem; color: var(--text-secondary); text-shadow: 0 1px 3px rgba(242, 196, 206, 0.2);">Will you be mine? 😋</h1>
+  <div class="card postcard-screen" id="screen4" style="display: none; opacity: 0; transform: scale(0.8); max-width: 480px; background: #FFFAF8; border: 1px solid #F2C4CE; border-radius: 20px; padding: 36px; box-shadow: 0 8px 32px rgba(242,196,206,0.35); position: relative; overflow: hidden;">
     
-    <div class="btn-container" style="margin-top: 1rem;">
-      <button class="btn btn-yes" id="yesBtn">Yes 😋</button>
-      <button class="btn btn-no" id="noBtn">No 🥺</button>
+    <div id="postcardSlider" style="width: 100%; position: relative; min-height: 240px; display: flex; align-items: center; justify-content: center;">
+      <!-- Active Postcard Content will be rendered here -->
     </div>
     
-    <p id="noMessage" style="color: var(--text-secondary); font-weight: 800; min-height: 28px; font-size: 1.05rem; transition: opacity 0.2s ease; opacity: 0; font-style: italic;"></p>
+    <div class="postcard-dots" id="postcardDots" style="display: flex; justify-content: center; gap: 8px; margin: 1.2rem 0 0.5rem 0;">
+      <!-- 7 progress dots -->
+    </div>
     
-    <button class="btn btn-no" onclick="backToHub('sectionD')" style="width: 100%; margin-top: 1rem; border-color: rgba(242, 196, 206, 0.3);">Back to menu 🌸</button>
-    <p class="screen-tagline" style="font-style: italic;">rudralovesmihikavatsa</p>
+    <button class="btn btn-yes" id="postcardNextBtn" onclick="nextPostcard()" style="width: 100%; margin-top: 1rem;">Next 💌</button>
+
+    <p class="screen-tagline" style="margin-top: 1.2rem;">rudralovesmihikavatsa 🌸</p>
   </div>
 
-
   <!-- ============================ -->
-  <!-- MESSAGE BOX: SAY SOMETHING   -->
+  <!-- SCREEN 5: HER REPLY          -->
   <!-- ============================ -->
-  <div class="card" id="messageBoxScreen" style="display: none; opacity: 0; transform: scale(0.8); max-width: 500px; gap: 1.5rem;">
-    <div class="profile-frame glow-frame" style="margin-bottom: 0.5rem; display: inline-block;">
-      <img id="messageBoxPhoto-slot" src="" alt="Mihika Recent" style="width: 100%; height: 100%; object-fit: cover;">
-    </div>
-    <h2 style="font-size: 2.1rem; line-height: 1.2;">Say something to Rudra 💌</h2>
-    <p style="color: var(--text-secondary); font-weight: 800; font-size: 1.05rem; margin-top: -1rem;">He's waiting to hear from you 🥺</p>
+  <div class="card" id="screen5" style="display: none; opacity: 0; transform: scale(0.8); max-width: 520px; padding: 2.5rem 2rem; gap: 1.2rem;">
+    <div style="font-size: 3.5rem; animation: rotateHeart 2.5s infinite; line-height: 1;">💌</div>
     
-    <div id="messageFormArea" style="width: 100%; display: flex; flex-direction: column; gap: 1rem;">
-      <textarea id="mihikaMessage" class="msg-textarea" placeholder="Dear Rudra... 🌸"></textarea>
+    <h2 style="font-family: 'Dancing Script', cursive; color: #5C3040; font-size: 2.2rem; line-height: 1.3; margin: 0.2rem 0;">Ab teri baari hai, Mihika Vatsa 💌</h2>
+    <p style="color: var(--text-secondary); font-weight: 700; font-size: 0.95rem; line-height: 1.5; margin-top: -0.5rem;">Rudra ne sab keh diya jo dil mein tha.<br>Ab tu kuch bol de. Chahe ek lafz hi sahi. 🌸</p>
+
+    <div id="replyFormContainer" style="width: 100%; display: flex; flex-direction: column; gap: 0.8rem; margin-top: 0.5rem;">
+      <textarea id="mihikaReplyText" placeholder="Dear Rudra... 🌸" style="width: 100%; min-height: 180px; padding: 1.2rem; font-family: 'Dancing Script', cursive; font-size: 20px; color: #5C3040; background: #FFFAF8; border: 1px solid #F2C4CE; border-radius: 16px; outline: none; resize: vertical; box-shadow: inset 0 2px 6px rgba(242,196,206,0.15);"></textarea>
       
-      <button class="btn btn-yes" id="sendMessageBtn" style="width: 100%;">Send to Rudra 😋</button>
-    </div>
-
-    <!-- Error State Overlay (hidden by default) -->
-    <div id="messageErrorArea" style="display: none; width: 100%; flex-direction: column; gap: 1rem; align-items: center;">
-      <p style="color: var(--text-primary); font-weight: 800; font-size: 1.1rem; text-align: center;">Oops something went wrong 🥺 Try again?</p>
-      <button class="btn btn-yes" id="retryMessageBtn" style="width: 100%;">Retry 🔄</button>
-    </div>
-
-    <button class="btn btn-no" onclick="backToHub('messageBoxScreen')" style="width: 100%; margin-top: 0.5rem;">Back to menu 🌸</button>
-    <p class="screen-tagline">rudralovesmihikavatsa 🌸</p>
-  </div>
-
-  <!-- ============================ -->
-  <!-- MESSAGE SUCCESS CARD         -->
-  <!-- ============================ -->
-  <div class="card" id="messageSuccessScreen" style="display: none; opacity: 0; transform: scale(0.8); max-width: 500px; gap: 1.5rem;">
-    <div style="font-size: 5rem; animation: rotateHeart 2.5s infinite;">😋</div>
-    <h2 style="font-size: 1.8rem; line-height: 1.3;">Your message is on its way to Rudra 💌</h2>
-    <p style="color: var(--text-secondary); font-weight: 800; font-size: 1.05rem; margin-top: -0.5rem;">He's going to smile so big reading this 🥺🌸</p>
-    
-    <button class="btn btn-yes" id="toPlannerBtn" style="width: 100%; margin-top: 1rem;">Let's Plan a Date! 📅😋</button>
-    
-    <p class="screen-tagline">rudralovesmihikavatsa 😋</p>
-  </div>
-
-  <!-- ============================ -->
-  <!-- SCREEN 4: CELEBRATION PLANNER-->
-  <!-- ============================ -->
-  <div class="card date-planner" id="screen4" style="display: none; opacity: 0; transform: scale(0.8); max-width: 550px;">
-    <h2 class="planner-title" style="font-size: 2.2rem;">Yayyyy Mihika!! 🎉😋</h2>
-    <p style="color: var(--text-secondary); font-weight: 800; font-size: 1.15rem; margin-top: -0.5rem; text-shadow: 0 1px 2px rgba(242,196,206,0.25);">You just made Rudra the happiest person alive!</p>
-    
-    <!-- Photo Collage -->
-    <div class="collage-container">
-      <div class="collage-side">
-        <div class="collage-img-wrapper">
-          <img id="collage-left-slot" src="" alt="Childhood" class="collage-img">
-        </div>
-        <p class="collage-caption">Then 🧸</p>
-      </div>
+      <div style="text-align: right; font-family: 'Dancing Script', cursive; font-size: 22px; font-weight: bold; color: #5C3040; margin-top: -0.2rem;">— Mihika Vatsa 💕</div>
       
-      <div class="collage-center">
-        <div class="collage-img-wrapper">
-          <img id="collage-center-slot" src="" alt="Recent" class="collage-img">
-        </div>
-        <p class="collage-caption">Always You 😋</p>
-      </div>
+      <button class="btn" id="sendReplyBtn" onclick="submitMihikaReply()" style="width: 100%; background: #EBA8B5; color: #5C3040; font-weight: 800; font-size: 1.15rem; border: none; padding: 1rem; border-radius: 50px; cursor: pointer; box-shadow: 0 8px 20px rgba(235,168,181,0.35); transition: all 0.3s ease; margin-top: 0.5rem;">Send to Rudra 💌</button>
       
-      <div class="collage-side">
-        <div class="collage-img-wrapper">
-          <img id="collage-right-slot" src="" alt="School" class="collage-img">
-        </div>
-        <p class="collage-caption">Now 🎓</p>
-      </div>
-    </div>
-    
-    <p style="color: var(--text-light); font-weight: 700; font-size: 0.98rem; text-align: center; margin-top: -0.5rem; margin-bottom: 0.8rem; font-style: italic;">"From then to now, always you 😋"</p>
-    <p style="color: var(--text-secondary); font-weight: 800; font-size: 1.05rem; margin-bottom: 0.8rem; text-align: center;">Now let's plan our first date 🌹</p>
-    
-    <!-- 1. Calendar Grid -->
-    <div class="planner-section">
-      <h3 class="section-title">1. Pick Our Day 📆</h3>
-      <div class="calendar-container">
-        <div class="calendar-header">
-          <button id="prevMonthBtn" class="cal-nav-btn">&lt;</button>
-          <span id="calendarMonthYear" class="calendar-month-year"></span>
-          <button id="nextMonthBtn" class="cal-nav-btn">&gt;</button>
-        </div>
-        <div class="calendar-weekdays">
-          <div>Su</div><div>Mo</div><div>Tu</div><div>We</div><div>Th</div><div>Fr</div><div>Sa</div>
-        </div>
-        <div class="calendar-days" id="calendarDays"></div>
-      </div>
-      <p class="special-day-text" id="specialDayText">Our first date: [select a date] 😋</p>
-    </div>
-
-    <!-- 2. Time Preferences -->
-    <div class="planner-section">
-      <h3 class="section-title">2. Choose the Time ⏰</h3>
-      <div class="time-picker-grid">
-        <button class="time-card" data-time="Morning (10 AM – 12 PM)">
-          <span class="time-emoji">☀️</span>
-          <span class="time-label">Morning</span>
-          <span class="time-hours">10 AM – 12 PM</span>
-        </button>
-        <button class="time-card" data-time="Afternoon (1 PM – 4 PM)">
-          <span class="time-emoji">🌤️</span>
-          <span class="time-label">Afternoon</span>
-          <span class="time-hours">1 PM – 4 PM</span>
-        </button>
-        <button class="time-card" data-time="Evening (5 PM – 8 PM)">
-          <span class="time-emoji">🌆</span>
-          <span class="time-label">Evening</span>
-          <span class="time-hours">5 PM – 8 PM</span>
-        </button>
-        <button class="time-card" data-time="Night (8 PM onwards)">
-          <span class="time-emoji">🌙</span>
-          <span class="time-label">Night</span>
-          <span class="time-hours">8 PM onwards</span>
-        </button>
+      <div id="replyErrorMsg" style="color: #7D4E57; font-weight: 800; font-size: 0.95rem; display: none; margin-top: 0.5rem; text-align: center;">
+        Kuch galat ho gaya 🥺 Try again?
+        <br>
+        <button class="btn btn-yes" onclick="submitMihikaReply()" style="margin-top: 0.6rem; padding: 0.5rem 1.5rem; font-size: 0.95rem;">Retry 💌</button>
       </div>
     </div>
 
-    <!-- 3. Place Selector -->
-    <div class="planner-section">
-      <h3 class="section-title">3. Select a Spot 📍</h3>
-      <div class="place-picker-grid">
-        <button class="place-card" data-place="Greater Noida West 🏙️">
-          <span class="place-emoji">🏙️</span>
-          <span class="place-name">Greater Noida West</span>
-        </button>
-        <button class="place-card" data-place="Noida 🌃">
-          <span class="place-emoji">🌃</span>
-          <span class="place-name">Noida</span>
-        </button>
-        <button class="place-card" data-place="Delhi 😋">
-          <span class="place-emoji">❤️</span>
-          <span class="place-name">Delhi</span>
-        </button>
-      </div>
+    <div id="replySuccessContainer" style="display: none; flex-direction: column; align-items: center; gap: 1.2rem; margin-top: 0.5rem;">
+      <div style="font-size: 4.5rem; animation: pulseHeart 1.5s infinite;">❤️</div>
+      <h2 style="font-family: 'Pacifico', cursive; color: #7D4E57; font-size: 1.9rem; line-height: 1.3;">Rudra ko mil gayi tumhari baat 🥺</h2>
+      <p style="font-family: 'Dancing Script', cursive; font-size: 1.4rem; color: #5C3040; font-weight: 700;">Woh bahut khush hoga aaj. 🌸</p>
     </div>
 
-    <!-- Confirm Button -->
-    <button class="btn btn-yes" id="confirmDateBtn" style="width: 100%; font-size: 1.25rem; margin-top: 0.8rem;">Lock it in! Rudra will be there 💌</button>
-    
-    <button class="btn btn-no" onclick="backToHub('screen4')" style="width: 100%; margin-top: 1rem; border-color: rgba(242, 196, 206, 0.3);">Back to menu 🌸</button>
-    <p class="screen-tagline">rudralovesmihikavatsa 🌸</p>
-  </div>
-
-  <!-- Final Confirmation Screen -->
-  <div class="celebration" id="finalConfirmationScreen" style="max-width: 520px; gap: 2rem;">
-    <div class="celebration-gif" style="font-size: 5rem; animation: rotateHeart 2.5s infinite;">💌🌹</div>
-    <h2 id="finalMessageText" style="font-size: 1.7rem; font-family: 'Nunito', sans-serif; font-weight: 800; text-shadow: 0 2px 8px rgba(199, 21, 133, 0.4); line-height: 1.45;"></h2>
-    <p class="screen-tagline">rudralovesmihikavatsa 🌸</p>
+    <p class="screen-tagline" style="margin-top: 0.8rem;">rudralovesmihikavatsa 💕</p>
   </div>
 
   <script>
@@ -1898,10 +1696,7 @@
       if (d === '27' && m === 'September' && y === '2008') {
         triggerHeartBurst();
         document.getElementById('lockErrorMsg').style.display = 'none';
-        transitionScreen('screen1', 'storyScreen');
-        setTimeout(() => {
-          startStorySequence();
-        }, 500);
+        transitionScreen('screen1', 'screen2');
       } else {
         const errorEl = document.getElementById('lockErrorMsg');
         errorEl.textContent = "Hmm... that doesn't seem right 🥺 Try again?";
@@ -1915,183 +1710,147 @@
       }
     });
 
-    // --- HUB PAGE NAVIGATORS ---
-    // --- HUB PAGE NAVIGATORS ---
-    let typingTimer = null;
-    const letterTextContent = `Dear Mihika,
+    // --- SCREEN 2: NO BUTTON & YES NAVIGATION ---
+    let screen2NoClicks = 0;
+    let screen2NoScale = 1.0;
 
-I don't even know where to start...
-
-Because some feelings are just too big for words.
-But I've been carrying this in my heart for so long,
-and today I finally found the courage.
-
-You are the kind of person who makes everything feel different.
-The way you smile, the way you talk, the way you just exist —
-it does something to me that I can not explain.
-
-I think about you more than I should.
-And honestly? I don't ever want to stop.
-
-I am Rudra. And I think I am completely,
-helplessly falling for you.
-
-This is not just a confession.
-This is me hoping, with my whole heart,
-that maybe — just maybe — you feel something too.
-
-With every heartbeat,`;
-
-    function startLetterSequence() {
-      const stage = document.getElementById('letterOpeningStage');
-      const paper = document.getElementById('paperB');
-      const letterText = document.getElementById('letterTextB');
-      const sigArea = document.getElementById('signatureAreaB');
-      const sigLine = document.getElementById('sigLineB');
-      const tagline = document.getElementById('taglineB');
-      const backBtn = document.getElementById('backToMenuBtnB');
+    function handleScreen2NoClick() {
+      screen2NoClicks++;
+      const noBtn = document.getElementById('screen2NoBtn');
+      const msgEl = document.getElementById('screen2NoMsg');
       
-      // Clear any existing typing or animations
-      if (typingTimer) {
-        clearInterval(typingTimer);
-        typingTimer = null;
+      screen2NoScale *= 0.8; // Shrink button by 20%
+      noBtn.style.transform = `scale(${screen2NoScale})`;
+      
+      const messages = [
+        "are you sure? 🥺",
+        "please... 💕",
+        "okay fine i'll make you 😏"
+      ];
+      
+      if (screen2NoClicks <= 3) {
+        msgEl.textContent = messages[screen2NoClicks - 1];
+        msgEl.style.opacity = '1';
       }
       
-      // Reset elements
-      stage.className = 'stage-closed';
-      letterText.innerHTML = '';
-      sigArea.style.display = 'none';
-      sigLine.innerHTML = '';
-      tagline.style.opacity = '0';
-      backBtn.style.display = 'none';
-      backBtn.style.opacity = '0';
-      backBtn.style.transform = 'translateY(10px)';
-      paper.scrollTop = 0;
+      if (screen2NoClicks >= 4) {
+        goToScreen3();
+      }
+    }
+
+    function goToScreen3() {
+      transitionScreen('screen2', 'screen3');
+      const btn = document.getElementById('screen3ContinueBtn');
+      btn.style.display = 'none';
+      btn.style.opacity = '0';
       
-      // Sequence: Closed -> Opening (0.5s) -> Sliding (0.8s) -> Expanded (1.0s) -> Typewriter (1.2s)
       setTimeout(() => {
-        stage.className = 'stage-opening';
+        btn.style.display = 'block';
+        setTimeout(() => {
+          btn.style.opacity = '1';
+        }, 50);
+      }, 2000);
+    }
+
+    // --- SCREEN 3: CONTINUE TO SCREEN 4 ---
+    function goToScreen4() {
+      transitionScreen('screen3', 'screen4');
+      currentPostcardIndex = 0;
+      renderPostcards();
+    }
+
+    // --- SCREEN 4: 7 POSTCARDS JOURNEY ---
+    const postcardsData = [
+      {
+        num: "01 / 07",
+        text: "Okay so you wanted to know the truth?\nI love you. I adore you.\nI am completely obsessed with you.\nEvery cf story, every liked reel —\nit was always, only for you. 🌸"
+      },
+      {
+        num: "02 / 07",
+        text: "The moment I saw that gusse wala\ncute sa face of yours...\nI genuinely fell for it.\nI thought it was just attraction.\n2-3 din mein bhool jaunga. 💕"
+      },
+      {
+        num: "03 / 07",
+        text: "But God had different plans.\nWe met again. We talked.\niTutor mein saath padhe.\nAnd slowly, you became the person\nI always thought about. 🥺"
+      },
+      {
+        num: "04 / 07",
+        text: "JEE ke baad sab kuch ruk gaya.\n2 months — sirf main, mera room,\naur meri books.\nBut even then, you were somewhere\nin the back of my mind. 💌"
+      },
+      {
+        num: "05 / 07",
+        text: "Phir ek din bahar gaya.\nAur tu dikh gayi.\nAunty se baat hui —\naur itna acha laga\njaise ghar wapas aaya ho. 🌸"
+      },
+      {
+        num: "06 / 07",
+        text: "Phir ek dophar tera message aaya.\nRD Sharma ke liye.\nAur main literally bahut khush tha\nsirf tera naam dekh ke.\nSirf tera naam. 💕"
+      },
+      {
+        num: "07 / 07",
+        text: "Aur phir ek din Aakash gaya.\nTu bhi wahi thi — 1 mahine baad.\nMain bhi 1-2 mahine baad aaya tha.\nSame day. Entry lete hi\nsabse pehle tu dikhi. 🥺\nYeh coincidence nahi tha, Mihika."
+      }
+    ];
+
+    let currentPostcardIndex = 0;
+    let isPostcardAnimating = false;
+
+    function renderPostcards() {
+      const slider = document.getElementById('postcardSlider');
+      const cardData = postcardsData[currentPostcardIndex];
+      
+      slider.innerHTML = `
+        <div class="postcard-item" id="activePostcardItem" style="width: 100%; text-align: left; transition: transform 0.4s ease, opacity 0.4s ease;">
+          <div style="text-align: right; color: #C9A0A8; font-size: 0.95rem; font-weight: 700; margin-bottom: 0.8rem; font-family: 'Nunito', sans-serif;">${cardData.num}</div>
+          <div style="font-family: 'Dancing Script', cursive; font-size: 22px; color: #5C3040; line-height: 1.8; white-space: pre-line;">${cardData.text}</div>
+        </div>
+      `;
+      
+      updateDots();
+    }
+
+    function updateDots() {
+      const dotsContainer = document.getElementById('postcardDots');
+      let dotsHtml = '';
+      for (let i = 0; i < postcardsData.length; i++) {
+        const isCurrent = i === currentPostcardIndex;
+        const color = isCurrent ? '#7D4E57' : '#F2C4CE';
+        const scale = isCurrent ? 'scale(1.2)' : 'scale(1)';
+        dotsHtml += `<span style="color: ${color}; font-size: 14px; transition: all 0.3s ease; transform: ${scale}; display: inline-block;">●</span>`;
+      }
+      dotsContainer.innerHTML = dotsHtml;
+    }
+
+    function nextPostcard() {
+      if (isPostcardAnimating) return;
+      
+      if (currentPostcardIndex < postcardsData.length - 1) {
+        isPostcardAnimating = true;
+        const activeItem = document.getElementById('activePostcardItem');
+        
+        // Slide out left
+        activeItem.style.transform = 'translateX(-100px)';
+        activeItem.style.opacity = '0';
         
         setTimeout(() => {
-          stage.className = 'stage-sliding';
+          currentPostcardIndex++;
+          const cardData = postcardsData[currentPostcardIndex];
+          const slider = document.getElementById('postcardSlider');
           
+          // Next slides in from right
+          slider.innerHTML = `
+            <div class="postcard-item" id="activePostcardItem" style="width: 100%; text-align: left; transform: translateX(100px); opacity: 0; transition: transform 0.4s ease, opacity 0.4s ease;">
+              <div style="text-align: right; color: #C9A0A8; font-size: 0.95rem; font-weight: 700; margin-bottom: 0.8rem; font-family: 'Nunito', sans-serif;">${cardData.num}</div>
+              <div style="font-family: 'Dancing Script', cursive; font-size: 22px; color: #5C3040; line-height: 1.8; white-space: pre-line;">${cardData.text}</div>
+            </div>
+          `;
+          
+          updateDots();
+          
+          const newItem = document.getElementById('activePostcardItem');
           setTimeout(() => {
-            stage.className = 'stage-expanded';
-            
+            newItem.style.transform = 'translateX(0)';
+            newItem.style.opacity = '1';
             setTimeout(() => {
-              startTypewriterEffect();
-            }, 1200); // 1.2s transition and pause
-          }, 1000);
-        }, 800);
-      }, 500);
-    }
-
-    function startTypewriterEffect() {
-      const letterText = document.getElementById('letterTextB');
-      const paper = document.getElementById('paperB');
-      
-      let index = 0;
-      // Add cursor
-      const cursor = document.createElement('span');
-      cursor.className = 'blinking-cursor';
-      cursor.textContent = '|';
-      letterText.appendChild(cursor);
-      
-      typingTimer = setInterval(() => {
-        if (index < letterTextContent.length) {
-          const char = letterTextContent.charAt(index);
-          cursor.insertAdjacentText('beforebegin', char);
-          index++;
-          paper.scrollTop = paper.scrollHeight;
-        } else {
-          clearInterval(typingTimer);
-          typingTimer = null;
-          
-          cursor.style.transition = 'opacity 0.5s';
-          cursor.style.opacity = '0';
-          setTimeout(() => {
-            cursor.remove();
-            showSignatureAndButton();
-          }, 500);
-        }
-      }, 35);
-    }
-
-    function showSignatureAndButton() {
-      const sigArea = document.getElementById('signatureAreaB');
-      const sigLine = document.getElementById('sigLineB');
-      const tagline = document.getElementById('taglineB');
-      const backBtn = document.getElementById('backToMenuBtnB');
-      const paper = document.getElementById('paperB');
-      
-      sigArea.style.display = 'block';
-      paper.scrollTop = paper.scrollHeight;
-      
-      const sigText = "— Rudra 💌";
-      let sigIndex = 0;
-      
-      const sigCursor = document.createElement('span');
-      sigCursor.className = 'blinking-cursor';
-      sigCursor.textContent = '|';
-      sigLine.appendChild(sigCursor);
-      
-      const sigTimer = setInterval(() => {
-        if (sigIndex < sigText.length) {
-          sigCursor.insertAdjacentText('beforebegin', sigText.charAt(sigIndex));
-          sigIndex++;
-          paper.scrollTop = paper.scrollHeight;
-        } else {
-          clearInterval(sigTimer);
-          sigCursor.remove();
-          
-          tagline.style.transition = 'opacity 0.8s ease';
-          tagline.style.opacity = '1';
-          paper.scrollTop = paper.scrollHeight;
-          
-          backBtn.style.display = 'block';
-          setTimeout(() => {
-            backBtn.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-            backBtn.style.opacity = '1';
-            backBtn.style.transform = 'translateY(0)';
-            paper.scrollTop = paper.scrollHeight;
-          }, 300);
-        }
-      }, 80);
-    }
-
-    function openSection(sectionId) {
-      if (sectionId === 'sectionC') {
-        buildReasonsGrid();
-      }
-      if (sectionId === 'sectionB') {
-        startLetterSequence();
-      }
-      transitionScreen('hubScreen', sectionId);
-    }
-
-    function backToHub(sectionId) {
-      if (sectionId === 'sectionA') {
-        document.getElementById('envelopeA').classList.remove('open');
-      } else if (sectionId === 'sectionB') {
-        document.getElementById('letterOpeningStage').className = 'stage-closed';
-        if (typingTimer) {
-          clearInterval(typingTimer);
-          typingTimer = null;
-        }
-      } else if (sectionId === 'messageBoxScreen') {
-        document.getElementById('mihikaMessage').value = '';
-        document.getElementById('messageErrorArea').style.display = 'none';
-        document.getElementById('messageFormArea').style.display = 'flex';
-      }
-      transitionScreen(sectionId, 'hubScreen');
-    }
-
-    // --- SECTION A: Envelope Opening ---
-    const envelopeA = document.getElementById('envelopeA');
-    envelopeA.addEventListener('click', () => {
-      if (!envelopeA.classList.contains('open')) {
-        envelopeA.classList.add('open');
-      }
     });
 
     // --- SECTION C: Dynamic 12 Reasons flip grid ---
@@ -2469,52 +2228,7 @@ With every heartbeat,`;
       });
     });
 
-    // --- OUR STORY CINEMATIC TYPEWRITER ---
-    const storyLines = [
-      { text: "Okay so you wanted to know the truth? 🥺", pause: 1400 },
-      { text: "I love you.", pause: 900 },
-      { text: "I adore you.", pause: 900 },
-      { text: "I am obsessed with you.", pause: 1400 },
-      { text: "Woh gusse wala cute sa face dekha tha...", pause: 1400 },
-      { text: "...aur bas ho gaya. 💕", pause: 1800 },
-      { text: "Pehle socha normal attraction hai...", pause: 1200 },
-      { text: "2-3 din mein bhool jaunga...", pause: 1500 },
-      { text: "But God had different plans 🌸", pause: 1800 },
-      { text: "From random chats to thinking about you every single second...", pause: 1600 },
-      { text: "Your smile, your voice, and the way you make me feel...", pause: 1600 },
-      { text: "It became the most beautiful part of my life. 🥺", pause: 2000 },
-      { text: "I don't just want you for today...", pause: 1200 },
-      { text: "I want you for all my tomorrows. ❤️", pause: 2000 },
-      { text: "And now, I have a few things to tell you...", pause: 1500 }
-    ];
 
-    let storyIndex = 0;
-    let storyTimer = null;
-
-    function startStorySequence() {
-      const container = document.getElementById('storyTextContainer');
-      const nextBtn = document.getElementById('storyNextBtn');
-      
-      container.innerHTML = '';
-      
-      storyLines.forEach(lineObj => {
-        const p = document.createElement('p');
-        p.textContent = lineObj.text;
-        p.style.marginBottom = '1.4rem';
-        p.style.opacity = '1';
-        container.appendChild(p);
-      });
-      
-      nextBtn.style.display = 'block';
-      nextBtn.style.opacity = '1';
-      nextBtn.style.transform = 'translateY(0)';
-      
-      container.scrollTop = 0;
-    }
-
-    function goToHubFromStory() {
-      transitionScreen('storyScreen', 'hubScreen');
-    }
 
     // Bootstrapping
     window.addEventListener('DOMContentLoaded', () => {
