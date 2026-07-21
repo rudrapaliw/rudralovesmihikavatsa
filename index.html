@@ -1452,7 +1452,7 @@
     
     <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem; width: 100%; position: relative; min-height: 110px;">
       <div style="display: flex; justify-content: center; align-items: center; gap: 1.2rem; width: 100%;">
-        <button class="btn btn-yes" id="screen2YesBtn" onclick="goToScreen3()">Yes</button>
+        <button class="btn btn-yes" id="screen2YesBtn" onclick="handleScreen2YesClick()">Yes</button>
         <button class="btn btn-no" id="screen2NoBtn" onclick="handleScreen2NoClick()">No</button>
       </div>
       <p id="screen2NoMsg" style="color: var(--text-primary); font-weight: 700; font-size: 0.95rem; min-height: 24px; opacity: 0; transition: opacity 0.3s ease; margin-top: 0.2rem;"></p>
@@ -1723,6 +1723,14 @@
       }
     }
 
+    function handleScreen2YesClick() {
+      if (screen2NoClicks > 0) {
+        goToScreen3();
+      } else {
+        goToScreen4('screen2');
+      }
+    }
+
     function goToScreen3() {
       transitionScreen('screen2', 'screen3');
       const btn = document.getElementById('screen3ContinueBtn');
@@ -1738,8 +1746,9 @@
     }
 
     // --- SCREEN 3: CONTINUE TO SCREEN 4 ---
-    function goToScreen4() {
-      transitionScreen('screen3', 'screen4');
+    function goToScreen4(fromId) {
+      const source = fromId || 'screen3';
+      transitionScreen(source, 'screen4');
       currentPostcardIndex = 0;
       renderPostcards();
     }
