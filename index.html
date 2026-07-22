@@ -2011,6 +2011,7 @@
       if (audio) {
         audio.pause();
         audio.src = 'images/Asking_Mihika_BGM.mp3';
+        audio.loop = true;
         audio.load();
         audio.play().then(() => {
           musicStarted = true;
@@ -2032,10 +2033,24 @@
     window.addEventListener('DOMContentLoaded', () => {
       populateDobOptions();
       initPhotoSlots();
+
+      // Audio track rotation listener
+      const audio = document.getElementById('bgMusic');
+      if (audio) {
+        audio.addEventListener('ended', () => {
+          // If the track that just ended was Barbaad BGM
+          if (audio.src.includes('Barbaad') || audio.src.includes('barbaad')) {
+            audio.src = 'images/Saiyaara Peaceful BGM.mp3';
+            audio.loop = true;
+            audio.load();
+            audio.play().catch(err => console.log("Failed to play peaceful track:", err));
+          }
+        });
+      }
     });
   </script>
   <!-- Floating Music Controls -->
-  <audio id="bgMusic" src="images/Saiyaara - Barbaad Sad BGM.mp3" loop></audio>
+  <audio id="bgMusic" src="images/Saiyaara - Barbaad Sad BGM.mp3"></audio>
   <button id="musicToggleBtn" class="music-toggle" onclick="toggleMusic()">🎵</button>
 
 </body>
