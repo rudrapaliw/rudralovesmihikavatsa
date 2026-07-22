@@ -1520,7 +1520,10 @@
       <!-- 7 progress dots -->
     </div>
     
-    <button class="btn btn-yes" id="postcardNextBtn" onclick="nextPostcard()" style="width: 100%; margin-top: 1rem;">Next 💌</button>
+    <div style="display: flex; gap: 1.5rem; width: 100%; margin-top: 1.2rem; align-items: center; justify-content: center;">
+      <button class="btn btn-no" id="postcardPrevBtn" onclick="prevPostcard()" style="width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; padding: 0; box-shadow: 0 4px 12px rgba(242,196,206,0.25); border: 1.5px solid var(--accent-main); background: #FFFAF8; color: #7D4E57; min-width: 50px; visibility: hidden;">←</button>
+      <button class="btn btn-yes" id="postcardNextBtn" onclick="nextPostcard()" style="width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; padding: 0; box-shadow: 0 4px 12px rgba(242,196,206,0.25); min-width: 50px; animation: none;">→</button>
+    </div>
 
     <p class="screen-tagline" style="margin-top: 1.2rem;">rudralovesmihikavatsa</p>
   </div>
@@ -1813,6 +1816,7 @@
         </div>
       `;
       updateDots();
+      updatePostcardNavigationButtons();
     }
 
     function updateDots() {
@@ -1845,6 +1849,7 @@
             </div>
           `;
           updateDots();
+          updatePostcardNavigationButtons();
           const newItem = document.getElementById('activePostcardItem');
           setTimeout(() => {
             newItem.style.transform = 'translateX(0)';
@@ -1856,6 +1861,50 @@
         }, 400);
       } else {
         transitionScreen('screen4', 'screen5');
+      }
+    }
+
+    function prevPostcard() {
+      if (isPostcardAnimating) return;
+      
+      if (currentPostcardIndex > 0) {
+        isPostcardAnimating = true;
+        const activeItem = document.getElementById('activePostcardItem');
+        activeItem.style.transform = 'translateX(100px)';
+        activeItem.style.opacity = '0';
+        
+        setTimeout(() => {
+          currentPostcardIndex--;
+          const cardData = postcardsData[currentPostcardIndex];
+          const slider = document.getElementById('postcardSlider');
+          slider.innerHTML = `
+            <div class="postcard-item" id="activePostcardItem" style="width: 100%; text-align: left; transform: translateX(-100px); opacity: 0; transition: transform 0.4s ease, opacity 0.4s ease;">
+              <div style="text-align: right; color: #C9A0A8; font-size: 0.95rem; font-weight: 700; margin-bottom: 0.8rem; font-family: 'Montserrat', sans-serif;">${cardData.num}</div>
+              <div style="font-family: 'Dancing Script', cursive; font-size: 22px; color: #5C3040; line-height: 1.8; white-space: pre-line;">${cardData.text}</div>
+            </div>
+          `;
+          updateDots();
+          updatePostcardNavigationButtons();
+          const newItem = document.getElementById('activePostcardItem');
+          setTimeout(() => {
+            newItem.style.transform = 'translateX(0)';
+            newItem.style.opacity = '1';
+            setTimeout(() => {
+              isPostcardAnimating = false;
+            }, 400);
+          }, 50);
+        }, 400);
+      }
+    }
+
+    function updatePostcardNavigationButtons() {
+      const prevBtn = document.getElementById('postcardPrevBtn');
+      if (prevBtn) {
+        if (currentPostcardIndex === 0) {
+          prevBtn.style.visibility = 'hidden';
+        } else {
+          prevBtn.style.visibility = 'visible';
+        }
       }
     }
 
