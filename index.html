@@ -1861,6 +1861,7 @@
         }, 400);
       } else {
         transitionScreen('screen4', 'screen5');
+        playMihikaAskingMusic();
       }
     }
 
@@ -2002,6 +2003,27 @@
         audio.pause();
         btn.classList.remove('playing');
         btn.textContent = '🔇';
+      }
+    }
+
+    function playMihikaAskingMusic() {
+      const audio = document.getElementById('bgMusic');
+      if (audio) {
+        audio.pause();
+        audio.src = 'images/Asking_Mihika_BGM.mp3';
+        audio.load();
+        audio.play().then(() => {
+          musicStarted = true;
+          const btn = document.getElementById('musicToggleBtn');
+          if (btn) {
+            btn.classList.add('playing');
+            btn.textContent = '🎵';
+            btn.style.display = 'flex';
+            btn.style.opacity = '1';
+          }
+        }).catch(err => {
+          console.log("Audio play blocked or failed:", err);
+        });
       }
     }
 
