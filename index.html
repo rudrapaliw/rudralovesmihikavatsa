@@ -1412,6 +1412,40 @@
       from { opacity: 0; transform: scale(0.8); }
       to { opacity: 1; transform: scale(1); }
     }
+
+    /* Floating Music Toggle Button */
+    .music-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid var(--accent-main);
+      box-shadow: 0 4px 15px rgba(242, 196, 206, 0.25);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      z-index: 9999;
+      font-size: 1.25rem;
+      color: #5C3040;
+      transition: all 0.3s ease;
+      opacity: 0;
+      user-select: none;
+    }
+    .music-toggle:hover {
+      transform: scale(1.08);
+      background: #fff;
+    }
+    .music-toggle.playing {
+      animation: rotateVinyl 4s linear infinite;
+    }
+    @keyframes rotateVinyl {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
   </style>
 </head>
 <body>
@@ -1724,6 +1758,7 @@
     }
 
     function handleScreen2YesClick() {
+      playMusic();
       if (screen2NoClicks > 0) {
         goToScreen3();
       } else {
@@ -1732,6 +1767,7 @@
     }
 
     function goToScreen3() {
+      playMusic();
       transitionScreen('screen2', 'screen3');
       const btn = document.getElementById('screen3ContinueBtn');
       btn.style.display = 'none';
@@ -1881,6 +1917,45 @@
       });
     }
 
+    // --- Background Music System ---
+    let musicStarted = false;
+
+    function playMusic() {
+      if (musicStarted) return;
+      const audio = document.getElementById('bgMusic');
+      const btn = document.getElementById('musicToggleBtn');
+      if (audio) {
+        audio.play().then(() => {
+          musicStarted = true;
+          if (btn) {
+            btn.classList.add('playing');
+            btn.style.display = 'flex';
+            setTimeout(() => {
+              btn.style.opacity = '1';
+            }, 50);
+          }
+        }).catch(err => {
+          console.log("Audio autoplay was blocked or failed:", err);
+        });
+      }
+    }
+
+    function toggleMusic() {
+      const audio = document.getElementById('bgMusic');
+      const btn = document.getElementById('musicToggleBtn');
+      if (!audio || !btn) return;
+      
+      if (audio.paused) {
+        audio.play().catch(err => console.log(err));
+        btn.classList.add('playing');
+        btn.textContent = '🎵';
+      } else {
+        audio.pause();
+        btn.classList.remove('playing');
+        btn.textContent = '🔇';
+      }
+    }
+
     // Bootstrapping
     populateDobOptions();
     window.addEventListener('DOMContentLoaded', () => {
@@ -1888,5 +1963,9 @@
       initPhotoSlots();
     });
   </script>
+  <!-- Floating Music Controls -->
+  <audio id="bgMusic" src="images/Saiyaara - Barbaad Sad BGM.mp3" loop></audio>
+  <button id="musicToggleBtn" class="music-toggle" onclick="toggleMusic()">🎵</button>
+
 </body>
 </html>
