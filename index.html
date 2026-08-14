@@ -1764,6 +1764,11 @@
     }
 
     // =========================================================================
+    // FORMSPREE CONFIGURATION
+    // =========================================================================
+    const FORMSPREE_FORM_ID = "mojoojdz";
+
+    // =========================================================================
     // PHOTO CONFIGURATION SLOTS
     // Replace the URLs inside the quotes with your own direct links (e.g. from imgbb.com)
     // =========================================================================
@@ -2149,7 +2154,7 @@
         sendBtn.innerHTML = 'Sending to Rudra... 💌';
       }
       
-      fetch("https://formspree.io/f/mojoojdz", {
+      fetch(`https://formspree.io/f/${FORMSPREE_FORM_ID}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
